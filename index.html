@@ -22,7 +22,7 @@
         .custom-scrollbar::-webkit-scrollbar-thumb { background-color: #cbd5e1; border-radius: 10px; }
 
         .nav-item { transition: all 0.2s ease; border-left: 3px solid transparent; }
-        .nav-item.active { background-color: rgba(255,255,255,0.1); color: white; border-left: 3px solid white; font-weight: bold; }
+        .nav-item.active { background-color: rgba(255,255,255,0.1); color: white !important; border-left: 3px solid white; font-weight: bold; }
     </style>
 </head>
 <body class="flex h-screen overflow-hidden text-gray-800">
@@ -35,35 +35,35 @@
             
             <div class="px-6 py-3 bg-white/5 flex justify-between items-center mt-1 text-gray-400"><div class="flex items-center gap-2"><span>🎁</span> 기프트카드 관리</div><span class="text-[10px]">▼</span></div>
             <div class="bg-[#0B132B] py-1">
-                <div id="nav-sales" onclick="loadPage('sales.html', 'nav-sales')" class="nav-item px-10 py-2 text-gray-400 hover:text-white cursor-pointer">판매 관리</div>
-                <div id="nav-buyer" onclick="loadPage('buyer.html', 'nav-buyer')" class="nav-item px-10 py-2 text-gray-400 hover:text-white cursor-pointer">구매자 관리</div>
+                <div id="nav-sales" onclick="loadPage('sales.html', 'nav-sales')" class="nav-item px-10 py-2 text-gray-400 hover:text-white cursor-pointer transition">판매 관리</div>
+                <div id="nav-buyer" onclick="loadPage('buyer.html', 'nav-buyer')" class="nav-item px-10 py-2 text-gray-400 hover:text-white cursor-pointer transition">구매자 관리</div>
             </div>
 
             <div class="px-6 py-3 bg-white/5 flex justify-between items-center mt-1 text-gray-400"><div class="flex items-center gap-2"><span>🏢</span> 조직관리</div><span class="text-[10px]">▼</span></div>
             <div class="bg-[#0B132B] py-1">
-                <div id="nav-employee" onclick="loadPage('employee.html', 'nav-employee')" class="nav-item px-10 py-2 text-gray-400 hover:text-white cursor-pointer">임직원 관리</div>
+                <div id="nav-employee" onclick="loadPage('employee.html', 'nav-employee')" class="nav-item px-10 py-2 text-gray-400 hover:text-white cursor-pointer transition">임직원 관리</div>
             </div>
 
             <div class="px-6 py-3 bg-white/5 flex justify-between items-center mt-1 text-gray-400"><div class="flex items-center gap-2"><span>💳</span> 카드 관리</div><span class="text-[10px]">▼</span></div>
             <div class="bg-[#0B132B] py-1">
-                <div id="nav-op-product" onclick="loadPage('op-product.html', 'nav-op-product')" class="nav-item px-10 py-2 text-gray-400 hover:text-white cursor-pointer">운영 상품</div>
-                <div id="nav-welfare-card" onclick="loadPage('welfare-card.html', 'nav-welfare-card')" class="nav-item px-10 py-2 text-gray-400 hover:text-white cursor-pointer">복지 카드 관리</div>
-                <div id="nav-card-order" onclick="loadPage('card-order.html', 'nav-card-order')" class="nav-item px-10 py-2 text-gray-400 hover:text-white cursor-pointer">카드 주문 관리</div>
+                <div id="nav-op-product" onclick="loadPage('op-product.html', 'nav-op-product')" class="nav-item px-10 py-2 text-gray-400 hover:text-white cursor-pointer transition">운영 상품</div>
+                <div id="nav-welfare-card" onclick="loadPage('welfare-card.html', 'nav-welfare-card')" class="nav-item px-10 py-2 text-gray-400 hover:text-white cursor-pointer transition">복지 카드 관리</div>
+                <div id="nav-card-order" onclick="loadPage('card-order.html', 'nav-card-order')" class="nav-item px-10 py-2 text-gray-400 hover:text-white cursor-pointer transition">카드 주문 관리</div>
             </div>
             
             <div class="px-6 py-3 bg-white/5 flex justify-between items-center mt-1 text-gray-400"><div class="flex items-center gap-2"><span>💰</span> 지급/회수</div><span class="text-[10px]">▼</span></div>
             <div class="bg-[#0B132B] py-1">
-                <div id="nav-pay-ret" onclick="loadPage('pay-ret.html', 'nav-pay-ret')" class="nav-item px-10 py-2 text-gray-400 hover:text-white cursor-pointer">지급/회수 관리</div>
+                <div id="nav-pay-ret" onclick="loadPage('pay-ret.html', 'nav-pay-ret')" class="nav-item px-10 py-2 text-gray-400 hover:text-white cursor-pointer transition">지급/회수 관리</div>
             </div>
 
             <div class="px-6 py-3 bg-white/5 flex justify-between items-center mt-1 text-gray-400"><div class="flex items-center gap-2"><span>📋</span> 이용 관리</div><span class="text-[10px]">▼</span></div>
             <div class="bg-[#0B132B] py-1">
-                <div id="nav-usage" onclick="loadPage('usage.html', 'nav-usage')" class="nav-item px-10 py-2 text-gray-400 hover:text-white cursor-pointer">카드 이용 내역</div>
+                <div id="nav-usage" onclick="loadPage('usage.html', 'nav-usage')" class="nav-item px-10 py-2 text-gray-400 hover:text-white cursor-pointer transition">카드 이용 내역</div>
             </div>
 
             <div class="px-6 py-3 bg-white/5 flex justify-between items-center mt-1 text-gray-400"><div class="flex items-center gap-2"><span>🏢</span> 기업정보</div><span class="text-[10px]">▼</span></div>
             <div class="bg-[#0B132B] py-1">
-                <div id="nav-corporate" onclick="loadPage('corporate.html', 'nav-corporate')" class="nav-item px-10 py-2 text-gray-400 hover:text-white cursor-pointer">기업 정보</div>
+                <div id="nav-corporate" onclick="loadPage('corporate.html', 'nav-corporate')" class="nav-item px-10 py-2 text-gray-400 hover:text-white cursor-pointer transition">기업 정보</div>
             </div>
         </nav>
     </aside>
@@ -79,48 +79,63 @@
     </main>
 
     <script>
+        /**
+         * 페이지 동적 로드 및 스크립트 강제 실행 함수
+         */
         async function loadPage(pageUrl, navId) {
             try {
+                // 1. 모든 메뉴 스타일 초기화
                 document.querySelectorAll('.nav-item, #nav-dashboard').forEach(el => {
                     el.classList.remove('active', 'text-white', 'font-bold', 'opacity-100');
                     if(el.id !== 'nav-dashboard') el.classList.add('text-gray-400');
                 });
                 
+                // 2. 선택된 메뉴 하이라이트 활성화
                 const targetNav = document.getElementById(navId);
                 if(targetNav) {
                     if(navId === 'nav-dashboard') {
                         targetNav.classList.add('opacity-100', 'font-bold', 'text-white');
                     } else {
-                        targetNav.classList.add('active', 'text-white');
-                        targetNav.classList.remove('text-gray-400');
+                        targetNav.classList.add('active');
                     }
                 }
 
+                // 3. 파일 비동기 호출
                 const response = await fetch(pageUrl);
-                if (!response.ok) throw new Error('파일 로드 실패');
+                if (!response.ok) throw new Error('파일을 찾을 수 없습니다.');
                 const html = await response.text();
                 
+                // 4. 메인 컨텐츠 영역 교체
                 const mainContent = document.getElementById('main-content');
                 mainContent.innerHTML = html;
 
+                // 5. [중요] 삽입된 HTML 내의 script 태그를 재생성하여 강제 실행
                 const scripts = mainContent.querySelectorAll('script');
                 scripts.forEach(oldScript => {
                     const newScript = document.createElement('script');
-                    newScript.text = oldScript.text;
-                    document.body.appendChild(newScript).parentNode.removeChild(newScript);
+                    // 기존 script의 모든 속성 복사 (src 등)
+                    Array.from(oldScript.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value));
+                    // 내부 코드 복사
+                    newScript.appendChild(document.createTextNode(oldScript.innerHTML));
+                    // 교체 및 실행
+                    oldScript.parentNode.replaceChild(newScript, oldScript);
                 });
 
             } catch (error) {
-                console.error(error);
+                console.error('페이지 로딩 에러:', error);
                 document.getElementById('main-content').innerHTML = `
                     <div class="flex items-center justify-center h-full flex-col gap-4">
                         <div class="text-6xl">🚧</div>
                         <div class="text-gray-500 font-bold text-xl">[${pageUrl}] 로드 실패</div>
+                        <div class="text-gray-400 text-sm">해당 파일이 작업 폴더에 존재하는지 확인해주세요.</div>
                     </div>`;
             }
         }
 
-        window.onload = () => { loadPage('dashboard.html', 'nav-dashboard'); };
+        // 브라우저 로딩 시 첫 화면 설정
+        window.onload = () => { 
+            loadPage('dashboard.html', 'nav-dashboard'); 
+        };
     </script>
 </body>
 </html>
