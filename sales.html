@@ -2,7 +2,8 @@
     <div class="flex justify-between items-center mb-4">
         <h1 class="text-xl font-bold text-gray-900">판매 관리</h1>
         <div class="flex gap-2">
-            <button class="bg-white border border-gray-300 text-gray-800 px-4 py-1.5 rounded-full text-[13px] font-bold shadow-sm hover:bg-gray-50 transition flex items-center gap-1">📋 일괄 등록</button>
+            <button onclick="alert('기존 카드 충전 로직을 실행합니다.')" class="bg-white border border-blue-400 text-blue-600 px-4 py-1.5 rounded-full text-[13px] font-bold shadow-sm hover:bg-blue-50 transition">기존 카드 충전</button>
+            <button onclick="alert('기존 고객 신규 카드 주문 로직을 실행합니다.')" class="bg-white border border-blue-400 text-blue-600 px-4 py-1.5 rounded-full text-[13px] font-bold shadow-sm hover:bg-blue-50 transition">고객 카드 주문</button>
             <button class="bg-[#121F3D] text-white px-5 py-1.5 rounded-full text-[13px] font-bold shadow-sm hover:bg-black transition">+ 신규 판매 등록</button>
         </div>
     </div>
@@ -62,15 +63,6 @@
                         <td class="text-right pr-6 font-bold">600,000</td>
                         <td><span class="bg-red-50 text-red-500 border border-red-200 px-2 py-0.5 rounded text-[10px] font-bold">매핑대기</span></td>
                     </tr>
-                    <tr class="hover:bg-blue-50 cursor-pointer border-b" onclick="alert('이미 완료된 주문입니다.')">
-                        <td>3</td>
-                        <td class="font-mono text-blue-600 font-bold underline">20260110-05</td>
-                        <td>2026/01/10 10:22:31</td>
-                        <td class="font-bold">김코나</td>
-                        <td class="text-left pl-6">더한옥 VIP 상품권 (1,000,000원)</td>
-                        <td class="text-right pr-6 font-bold">1,000,000</td>
-                        <td><span class="bg-blue-50 text-blue-600 border border-blue-200 px-2 py-0.5 rounded text-[10px] font-bold">지급완료</span></td>
-                    </tr>
                 </tbody>
             </table>
         </div>
@@ -78,7 +70,6 @@
 </div>
 
 <div id="view-sales-detail" class="flex-1 overflow-y-auto p-8 hidden flex-col w-full h-full animate-fade-in bg-[#F4F5F8]">
-    
     <div class="flex items-center justify-between mb-6">
         <div class="flex items-center gap-3">
             <button onclick="switchSalesView('view-sales-list')" class="text-gray-400 hover:text-black text-2xl transition">←</button>
@@ -155,20 +146,56 @@
                         <th class="py-3.5 w-40 pr-10 text-right">금액(원)</th>
                     </tr>
                 </thead>
-                <tbody class="text-gray-700" id="dtl_mapping_body">
-                    </tbody>
+                <tbody class="text-gray-700" id="dtl_mapping_body"></tbody>
             </table>
         </div>
     </div>
 </div>
 
+<div id="mappingPopup" class="fixed inset-0 bg-black bg-opacity-50 z-[100] flex items-center justify-center hidden">
+    <div class="bg-white rounded-lg shadow-xl w-[500px] overflow-hidden animate-fade-in">
+        <div class="bg-[#121F3D] p-4 flex justify-between items-center">
+            <h2 class="text-white font-bold">재고 카드 매핑</h2>
+            <button onclick="closeMappingPopup()" class="text-white text-2xl">&times;</button>
+        </div>
+        <div class="p-6">
+            <div class="mb-4">
+                <input type="text" class="input-kona" placeholder="카드번호 뒤 4자리 검색...">
+            </div>
+            <div class="max-h-60 overflow-y-auto border border-gray-200 rounded">
+                <table class="w-full text-xs text-center">
+                    <thead class="bg-gray-50 sticky top-0">
+                        <tr><th class="p-2 border-b">선택</th><th class="p-2 border-b">카드번호</th><th class="p-2 border-b">상태</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr class="hover:bg-blue-50 cursor-pointer" onclick="selectCardRow(this, '9440-1234-5678-0001')">
+                            <td class="p-2 border-b"><input type="radio" name="card_sel"></td>
+                            <td class="p-2 border-b font-mono">9440-1234-5678-0001</td>
+                            <td class="p-2 border-b text-green-600 font-bold">재고보유</td>
+                        </tr>
+                        <tr class="hover:bg-blue-50 cursor-pointer" onclick="selectCardRow(this, '9440-1234-5678-0002')">
+                            <td class="p-2 border-b"><input type="radio" name="card_sel"></td>
+                            <td class="p-2 border-b font-mono">9440-1234-5678-0002</td>
+                            <td class="p-2 border-b text-green-600 font-bold">재고보유</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="mt-6 flex gap-2">
+                <button onclick="closeMappingPopup()" class="flex-1 bg-gray-100 py-2 rounded font-bold">취소</button>
+                <button onclick="confirmMapping()" class="flex-1 bg-blue-600 text-white py-2 rounded font-bold">매핑 확정</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
+    let activeRowIndex = null;
+    let tempCardNum = null;
+
     function switchSalesView(viewId) {
         document.getElementById('view-sales-list').classList.add('hidden');
-        document.getElementById('view-sales-list').classList.remove('flex');
         document.getElementById('view-sales-detail').classList.add('hidden');
-        document.getElementById('view-sales-detail').classList.remove('flex');
-        
         const target = document.getElementById(viewId);
         target.classList.remove('hidden'); 
         target.classList.add('flex');
@@ -180,17 +207,16 @@
         document.getElementById('dtl_reg_date').innerText = date;
         document.getElementById('dtl_total_price').innerText = price + " 원";
         
-        // 매핑 테이블 데이터 동적 생성 (여러 장일 경우 대응)
         const mappingBody = document.getElementById('dtl_mapping_body');
-        const count = price.includes('600') ? 3 : 1; // REQ건은 3장 예시
+        const count = price.includes('600') ? 3 : 1; 
         let rows = '';
         for(let i=1; i<=count; i++) {
             rows += `
                 <tr class="border-b border-gray-100 hover:bg-gray-50">
                     <td class="py-5 text-gray-400">${i}</td>
                     <td class="text-left pl-10 font-bold text-gray-800">더한옥헤리티지하우스 상품권 (200,000원)</td>
-                    <td>
-                        <button class="border border-blue-400 text-blue-600 px-6 py-1.5 rounded-full text-[11px] font-bold bg-blue-50 hover:bg-blue-100 transition shadow-sm">
+                    <td id="mapping_cell_${i}">
+                        <button onclick="openMappingPopup(${i})" class="border border-blue-400 text-blue-600 px-6 py-1.5 rounded-full text-[11px] font-bold bg-blue-50 hover:bg-blue-100 transition shadow-sm">
                             재고 카드 매핑하기
                         </button>
                     </td>
@@ -198,7 +224,29 @@
                 </tr>`;
         }
         mappingBody.innerHTML = rows;
-
         switchSalesView('view-sales-detail');
+    }
+
+    // 팝업 제어 함수
+    function openMappingPopup(idx) {
+        activeRowIndex = idx;
+        tempCardNum = null;
+        document.getElementById('mappingPopup').classList.remove('hidden');
+    }
+
+    function closeMappingPopup() {
+        document.getElementById('mappingPopup').classList.add('hidden');
+    }
+
+    function selectCardRow(row, num) {
+        row.querySelector('input[type="radio"]').checked = true;
+        tempCardNum = num;
+    }
+
+    function confirmMapping() {
+        if(!tempCardNum) { alert('매핑할 카드를 선택해주세요.'); return; }
+        const targetCell = document.getElementById(`mapping_cell_${activeRowIndex}`);
+        targetCell.innerHTML = `<span class="text-blue-700 font-mono font-bold">${tempCardNum}</span>`;
+        closeMappingPopup();
     }
 </script>
