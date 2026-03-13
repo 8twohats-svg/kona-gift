@@ -1,0 +1,200 @@
+<div id="view-op-product" class="flex-1 overflow-y-auto p-6 flex flex-col w-full h-full animate-fade-in bg-[#F4F5F8]">
+    
+    <div class="flex items-center justify-between mb-8">
+        <div class="flex items-center gap-3">
+            <h1 class="text-xl font-bold text-gray-900">운영 상품 <span class="text-xs text-gray-500 font-normal ml-2">고객에게 판매/발급할 기프트카드 상품을 관리합니다.</span></h1>
+            <button class="border border-gray-300 bg-white text-gray-600 py-1 px-2 rounded text-xs hover:bg-gray-50 transition flex items-center gap-1" onclick="window.open('#')">
+                매뉴얼 바로가기 
+                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+            </button>
+        </div>
+        <div class="flex items-center gap-2">
+            <button class="bg-white border border-gray-300 text-gray-800 px-5 py-1.5 rounded-full text-[13px] font-bold shadow-sm hover:bg-gray-50 transition" onclick="alert('개인정보 마스킹이 해제됩니다.')">마스킹 해제</button>
+            <button class="bg-white border border-gray-300 text-gray-800 px-5 py-1.5 rounded-full text-[13px] font-bold shadow-sm hover:bg-gray-50 transition flex items-center gap-1" onclick="alert('신규 기프트카드 상품 신청 폼이 열립니다.')">
+                <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                상품 신청
+            </button>
+        </div>
+    </div>
+
+    <div class="flex flex-col gap-8 pb-10">
+        
+        <div class="bg-white border border-gray-200 shadow-sm rounded-lg relative">
+            <div class="absolute -top-4 left-6 w-8 h-8 bg-[#1A1A1A] text-white rounded-full flex items-center justify-center font-bold text-sm shadow-md z-10">1</div>
+            
+            <div class="p-8 pb-6">
+                <div class="flex items-center gap-3 mb-6 ml-6">
+                    <h2 class="text-[17px] font-bold text-gray-900">더한옥헤리티지 기프트카드 (953365004054000)</h2>
+                    <span class="bg-pink-50 text-pink-500 border border-pink-200 px-2 py-0.5 rounded-full text-[11px] font-bold">디자인 확정</span>
+                </div>
+                
+                <div class="flex gap-10 ml-6">
+                    <div class="w-[120px] h-[190px] bg-gradient-to-br from-amber-600 to-amber-800 rounded-xl flex flex-col justify-between p-3 text-white shadow relative shrink-0">
+                        <div class="absolute inset-0 bg-white opacity-10 rounded-xl" style="clip-path: polygon(0 0, 100% 0, 100% 50%, 0 100%);"></div>
+                        <div class="relative z-10 text-[9px] font-bold opacity-90 tracking-wider">KONA BIZ</div>
+                        <div class="relative z-10 text-sm font-bold leading-tight tracking-wider text-amber-100">THE HANOK<br><span class="text-[10px] font-normal tracking-normal opacity-90 mt-1 block">GIFT CARD</span></div>
+                    </div>
+                    
+                    <div class="flex-1 flex flex-col justify-between">
+                        <div class="grid grid-cols-2 gap-x-12 gap-y-5 text-[13px]">
+                            <div class="flex items-center"><span class="w-28 text-gray-500">상품 유형</span><span class="font-bold text-blue-700">기프트카드</span></div>
+                            <div class="flex items-center"><span class="w-28 text-gray-500">카드 이름 표기</span><span class="font-medium text-gray-800">-</span></div>
+                            <div class="flex items-center"><span class="w-28 text-gray-500">발급 유형</span><span class="font-medium text-gray-800">실물카드</span></div>
+                            <div class="flex items-center"><span class="w-28 text-gray-500">디자인</span><span class="font-medium text-gray-800">직접 디자인</span></div>
+                            <div class="flex items-center"><span class="w-28 text-gray-500">카드 유형</span><span class="font-medium text-gray-800">일반카드</span></div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between mt-8 pt-5 border-t border-gray-100 text-[13px]">
+                            <div class="flex gap-16">
+                                <div class="flex items-center gap-6"><span class="text-gray-500">카드 수</span><span class="font-bold text-gray-800">150(지급) / 500(전체)</span></div>
+                                <div class="flex items-center gap-6"><span class="text-gray-500">상품 가격</span><span class="font-medium text-gray-800">0원</span></div>
+                            </div>
+                            <div class="flex gap-2">
+                                <button class="btn-outline px-5 py-1.5 font-bold text-gray-700 hover:bg-gray-50">견적서 다운로드</button>
+                                <button class="btn-outline px-5 py-1.5 font-bold text-blue-700 border-blue-200 bg-blue-50 hover:bg-blue-100">💳 재고 주문</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-200">
+                <div class="flex items-center justify-between px-6 py-3 cursor-pointer bg-white hover:bg-gray-50 transition" onclick="toggleAccordion('acc1', 'icon1')">
+                    <div class="flex items-center gap-2 font-bold text-[13px] text-gray-800">
+                        <span id="text_acc1">- 기프트카드 예치금 계좌 정보</span>
+                        <svg class="w-4 h-4 transform transition-transform text-gray-400 rotate-180" id="icon1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </div>
+                    <span class="text-xs text-gray-500">금액단위 : 원</span>
+                </div>
+                <div id="acc1" class="block overflow-hidden transition-all duration-300">
+                    <div class="w-full overflow-x-auto">
+                        <table class="w-full text-center text-xs kona-table min-w-[900px] border-t-0">
+                            <thead class="bg-[#121F3D] text-white">
+                                <tr><th class="py-2.5 w-16">NO</th><th class="py-2.5">충전금/예치금명</th><th class="py-2.5">예치금 계좌번호</th><th class="py-2.5 w-36">가상계좌확인서</th><th class="py-2.5 w-36">충전요청서</th><th class="py-2.5 w-36">예치금 잔액</th></tr>
+                            </thead>
+                            <tbody class="text-gray-700 bg-white">
+                                <tr class="border-b border-gray-200 hover:bg-blue-50 transition">
+                                    <td class="py-3.5">1</td>
+                                    <td class="text-blue-600 underline font-bold cursor-pointer hover:text-blue-800" onclick="alert('기프트카드 예치금 상세 내역으로 이동합니다.')">더한옥헤리티지 기프트카드 예치금</td>
+                                    <td class="font-mono">
+                                        <div class="flex items-center justify-center gap-1.5">
+                                            우리은행 281910431***** <button class="text-gray-400 hover:text-gray-800 transition" onclick="alert('계좌번호가 복사되었습니다.')" title="복사"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg></button>
+                                        </div>
+                                    </td>
+                                    <td><button class="border border-blue-200 text-blue-600 bg-blue-50 px-4 py-1 rounded-full text-[11px] font-bold shadow-sm hover:bg-blue-100 transition">발급</button></td>
+                                    <td><button class="border border-blue-200 text-blue-600 bg-blue-50 px-4 py-1 rounded-full text-[11px] font-bold shadow-sm hover:bg-blue-100 transition">발급</button></td>
+                                    <td><button class="border border-gray-300 text-gray-700 bg-white px-4 py-1 rounded-full text-[11px] font-bold shadow-sm hover:bg-gray-50 transition">확인</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white border border-gray-200 shadow-sm rounded-lg relative mt-2">
+            <div class="absolute -top-4 left-6 w-8 h-8 bg-[#1A1A1A] text-white rounded-full flex items-center justify-center font-bold text-sm shadow-md z-10">2</div>
+            
+            <div class="p-8 pb-6">
+                <div class="flex items-center gap-3 mb-6 ml-6">
+                    <h2 class="text-[17px] font-bold text-gray-900">더한옥 VIP 기프트카드 (953365003953000)</h2>
+                    <span class="bg-pink-50 text-pink-500 border border-pink-200 px-2 py-0.5 rounded-full text-[11px] font-bold">디자인 확정</span>
+                </div>
+                
+                <div class="flex gap-10 ml-6">
+                    <div class="w-[120px] h-[190px] bg-[#1A1A1A] rounded-xl flex flex-col justify-between p-3 text-white shadow relative shrink-0 overflow-hidden">
+                        <div class="absolute inset-0 opacity-20 bg-[repeating-linear-gradient(90deg,transparent,transparent_2px,#fff_2px,#fff_4px)]"></div>
+                        <div class="relative z-10 text-[9px] font-bold opacity-80 tracking-wider flex justify-between">
+                            <span>KONA BIZ</span>
+                            <div class="w-5 h-3 bg-yellow-600 rounded-sm"></div> </div>
+                        <div class="relative z-10 text-xs font-bold leading-tight tracking-widest text-yellow-500 text-center mb-6">VIP GIFT CARD</div>
+                    </div>
+                    
+                    <div class="flex-1 flex flex-col justify-between">
+                        <div class="grid grid-cols-2 gap-x-12 gap-y-5 text-[13px]">
+                            <div class="flex items-center"><span class="w-28 text-gray-500">상품 유형</span><span class="font-bold text-blue-700">기프트카드</span></div>
+                            <div class="flex items-center"><span class="w-28 text-gray-500">카드 이름 표기</span><span class="font-medium text-gray-800">-</span></div>
+                            <div class="flex items-center"><span class="w-28 text-gray-500">발급 유형</span><span class="font-medium text-gray-800">실물카드</span></div>
+                            <div class="flex items-center"><span class="w-28 text-gray-500">디자인</span><span class="font-medium text-gray-800">직접 디자인</span></div>
+                            <div class="flex items-center"><span class="w-28 text-gray-500">카드 유형</span><span class="font-medium text-gray-800">일반카드</span></div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between mt-8 pt-5 border-t border-gray-100 text-[13px]">
+                            <div class="flex gap-16">
+                                <div class="flex items-center gap-6"><span class="text-gray-500">카드 수</span><span class="font-bold text-gray-800">10(지급) / 50(전체)</span></div>
+                                <div class="flex items-center gap-6"><span class="text-gray-500">상품 가격</span><span class="font-medium text-gray-800">0원</span></div>
+                            </div>
+                            <div class="flex gap-2">
+                                <button class="btn-outline px-5 py-1.5 font-bold text-gray-700 hover:bg-gray-50">견적서 다운로드</button>
+                                <button class="btn-outline px-5 py-1.5 font-bold text-blue-700 border-blue-200 bg-blue-50 hover:bg-blue-100">💳 재고 주문</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-200">
+                <div class="flex items-center justify-between px-6 py-3 cursor-pointer bg-white hover:bg-gray-50 transition" onclick="toggleAccordion('acc2', 'icon2')">
+                    <div class="flex items-center gap-2 font-bold text-[13px] text-gray-800">
+                        <span id="text_acc2">+ 기프트카드 예치금 계좌 정보</span>
+                        <svg class="w-4 h-4 transform transition-transform text-gray-400" id="icon2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </div>
+                    <span class="text-xs text-gray-500">금액단위 : 원</span>
+                </div>
+                <div id="acc2" class="hidden overflow-hidden transition-all duration-300">
+                    <div class="w-full overflow-x-auto">
+                        <table class="w-full text-center text-xs kona-table min-w-[900px] border-t-0">
+                            <thead class="bg-[#121F3D] text-white">
+                                <tr><th class="py-2.5 w-16">NO</th><th class="py-2.5">충전금/예치금명</th><th class="py-2.5">예치금 계좌번호</th><th class="py-2.5 w-36">가상계좌확인서</th><th class="py-2.5 w-36">충전요청서</th><th class="py-2.5 w-36">예치금 잔액</th></tr>
+                            </thead>
+                            <tbody class="text-gray-700 bg-white">
+                                <tr class="border-b border-gray-200 hover:bg-blue-50 transition">
+                                    <td class="py-3.5">1</td>
+                                    <td class="text-blue-600 underline font-bold cursor-pointer hover:text-blue-800" onclick="alert('기프트카드 예치금 상세 내역으로 이동합니다.')">더한옥 VIP 기프트카드 예치금</td>
+                                    <td class="font-mono">
+                                        <div class="flex items-center justify-center gap-1.5">
+                                            국민은행 10023456***** <button class="text-gray-400 hover:text-gray-800 transition" onclick="alert('계좌번호가 복사되었습니다.')" title="복사"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg></button>
+                                        </div>
+                                    </td>
+                                    <td><button class="border border-blue-200 text-blue-600 bg-blue-50 px-4 py-1 rounded-full text-[11px] font-bold shadow-sm hover:bg-blue-100 transition">발급</button></td>
+                                    <td><button class="border border-blue-200 text-blue-600 bg-blue-50 px-4 py-1 rounded-full text-[11px] font-bold shadow-sm hover:bg-blue-100 transition">발급</button></td>
+                                    <td><button class="border border-gray-300 text-gray-700 bg-white px-4 py-1 rounded-full text-[11px] font-bold shadow-sm hover:bg-gray-50 transition">확인</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<style>
+    .animate-fade-in { animation: fadeIn 0.3s ease-in-out; }
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(5px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+</style>
+
+<script>
+    // 상품 정보 아코디언 토글 로직
+    function toggleAccordion(contentId, iconId) {
+        const content = document.getElementById(contentId);
+        const icon = document.getElementById(iconId);
+        const textSpan = document.getElementById('text_' + contentId);
+        
+        if (content.classList.contains('hidden')) {
+            content.classList.remove('hidden');
+            content.classList.add('block');
+            icon.classList.add('rotate-180');
+            textSpan.innerText = '- 기프트카드 예치금 계좌 정보';
+        } else {
+            content.classList.add('hidden');
+            content.classList.remove('block');
+            icon.classList.remove('rotate-180');
+            textSpan.innerText = '+ 기프트카드 예치금 계좌 정보';
+        }
+    }
+</script>

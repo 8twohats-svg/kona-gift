@@ -1,0 +1,181 @@
+<div id="view-usage-list" class="flex-1 overflow-y-auto p-6 flex flex-col w-full h-full animate-fade-in bg-[#F4F5F8]">
+    
+    <div class="flex justify-between items-end mb-4 border-b border-gray-300 pb-2">
+        <div class="flex items-center gap-6">
+            <h1 class="text-xl font-bold text-[#121F3D] cursor-pointer relative top-[9px] border-b-[3px] border-[#121F3D] pb-2">
+                복지카드 이용 내역
+            </h1>
+            <h1 class="text-lg font-bold text-gray-400 cursor-pointer relative top-[9px] hover:text-gray-600 transition pb-2">
+                법인카드 이용 내역
+            </h1>
+            <h1 class="text-lg font-bold text-gray-400 cursor-pointer relative top-[9px] hover:text-gray-600 transition pb-2">
+                법인카드 이용 내역(포인트)
+            </h1>
+            <button class="border border-gray-300 bg-white text-gray-600 py-0.5 px-2 rounded text-[11px] hover:bg-gray-50 transition flex items-center gap-1 relative top-[3px]" onclick="window.open('#')">
+                매뉴얼 바로가기 
+                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+            </button>
+        </div>
+        <div class="flex items-center gap-3 pb-1">
+            <label class="flex items-center gap-2 cursor-pointer">
+                <span class="text-xs text-blue-600 font-bold">조회 후 닫힘</span>
+                <span class="bg-gray-200 text-gray-500 px-3 py-1 rounded-full text-xs font-bold shadow-inner border border-gray-300">OFF</span>
+            </label>
+            <button class="bg-[#121F3D] text-white w-7 h-7 rounded-full font-bold flex items-center justify-center hover:bg-black transition">X</button>
+        </div>
+    </div>
+
+    <div class="bg-white border border-gray-200 p-6 mb-6 shadow-sm relative text-[13px] flex flex-col gap-4 rounded-lg">
+        <div class="grid grid-cols-12 gap-4 items-center">
+            <div class="col-span-1 font-bold text-gray-700">검색 분류</div>
+            <div class="col-span-7 flex gap-2">
+                <select class="input-kona w-40 font-medium bg-gray-50"><option>임직원명</option><option>카드번호</option><option>가맹점명</option></select>
+                <input type="text" class="input-kona flex-1 max-w-md" placeholder="검색어를 입력해 주세요.">
+            </div>
+            <div class="col-span-1 font-bold text-gray-700 text-right pr-4">거래유형</div>
+            <div class="col-span-3">
+                <select class="input-kona w-full font-medium"><option>전체</option><option>결제</option><option>취소</option></select>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-12 gap-4 items-center">
+            <div class="col-span-1 font-bold text-gray-700">거래 기간</div>
+            <div class="col-span-11 flex gap-2 items-center">
+                <input type="date" class="input-kona w-36 text-gray-600" value="2026-02-12"> 
+                <span class="text-gray-400">~</span> 
+                <input type="date" class="input-kona w-36 text-gray-600" value="2026-03-12">
+                <div class="flex gap-1 ml-2">
+                    <button class="border border-gray-300 bg-white text-gray-600 px-3 py-1 rounded-full text-xs hover:bg-gray-50">직접입력</button>
+                    <button class="border border-gray-300 bg-white text-gray-600 px-3 py-1 rounded-full text-xs hover:bg-gray-50">당일</button>
+                    <button class="border border-gray-300 bg-white text-gray-600 px-3 py-1 rounded-full text-xs hover:bg-gray-50">전일</button>
+                    <button class="border border-gray-300 bg-white text-gray-600 px-3 py-1 rounded-full text-xs hover:bg-gray-50">1주일</button>
+                    <button class="bg-[#1A1A1A] text-white px-4 py-1 rounded-full text-xs font-bold shadow-sm">1개월</button>
+                    <button class="border border-gray-300 bg-white text-gray-600 px-3 py-1 rounded-full text-xs hover:bg-gray-50">3개월</button>
+                    <button class="border border-gray-300 bg-white text-gray-600 px-3 py-1 rounded-full text-xs hover:bg-gray-50">1년</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-12 gap-4 items-center">
+            <div class="col-span-1 font-bold text-gray-700">상품명</div>
+            <div class="col-span-7">
+                <select class="input-kona w-full font-medium"><option>전체</option><option>더한옥헤리티지 기프트카드</option></select>
+            </div>
+            <div class="col-span-1 font-bold text-gray-700 text-right pr-4">상태</div>
+            <div class="col-span-3">
+                <select class="input-kona w-full font-medium"><option>전체</option><option>승인</option><option>거절</option></select>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-12 gap-4 items-center">
+            <div class="col-span-1 font-bold text-gray-700">카드포인트명</div>
+            <div class="col-span-11"><select class="input-kona w-full max-w-3xl font-medium"><option>전체</option></select></div>
+        </div>
+
+        <div class="flex justify-end gap-2 mt-2 pt-4 border-t border-gray-100">
+            <button class="btn-outline px-6 py-2 rounded-full font-bold text-[13px]">초기화</button>
+            <button class="bg-[#121F3D] text-white px-8 py-2 rounded-full font-bold text-[13px] shadow-sm hover:bg-black transition">조회</button>
+            <button class="bg-[#1636d6] text-white px-6 py-2 rounded-full font-bold text-[13px] shadow-sm hover:bg-blue-800 transition">다운로드</button>
+        </div>
+    </div>
+
+    <div class="flex justify-between items-end mb-2 px-1">
+        <div class="flex items-center gap-3 text-[13px]">
+            <span class="font-bold text-gray-800">전체 <span class="text-blue-600">20</span></span>
+            <span class="text-gray-300">|</span>
+            <button class="text-gray-600 font-bold hover:text-gray-900 flex items-center gap-1">
+                이용내역 상세 다운로드 <span class="bg-gray-800 text-white rounded-full w-3.5 h-3.5 inline-flex items-center justify-center text-[9px] cursor-help ml-0.5">?</span>
+            </button> 
+        </div>
+        <select class="input-kona py-1.5 w-32 text-xs font-medium bg-white"><option>50개씩 보기</option></select>
+    </div>
+
+    <div class="bg-white border border-gray-200 shadow-sm w-full flex-1 relative rounded-lg overflow-hidden">
+        <div class="custom-scrollbar w-full h-full overflow-y-auto">
+            <table class="w-full text-center text-[12.5px] kona-table min-w-[1600px]">
+                <thead class="bg-[#121F3D] text-white">
+                    <tr>
+                        <th class="w-10 py-3.5"><input type="checkbox" class="w-3.5 h-3.5 cursor-pointer"></th>
+                        <th class="py-3.5">NO</th>
+                        <th class="py-3.5">거래일시</th>
+                        <th class="py-3.5">상품명</th>
+                        <th class="py-3.5">포인트명</th>
+                        <th class="py-3.5">카드번호</th>
+                        <th class="py-3.5">임직원명</th>
+                        <th class="py-3.5">사원번호</th>
+                        <th class="py-3.5 text-left pl-6">가맹점명</th>
+                        <th class="py-3.5">거래유형</th>
+                        <th class="py-3.5 text-right pr-6">승인 금액(원)</th>
+                        <th class="py-3.5">상태</th>
+                    </tr>
+                </thead>
+                <tbody class="text-gray-700 bg-white">
+                    <tr class="hover:bg-blue-50 transition border-b border-gray-200">
+                        <td class="py-3"><input type="checkbox" class="w-3.5 h-3.5 cursor-pointer"></td>
+                        <td class="text-gray-500">1</td>
+                        <td class="font-mono text-gray-600">2026/03/06<br>00:00:52</td>
+                        <td class="font-bold text-gray-800">더한옥헤리티지 기프트카드</td>
+                        <td>더한옥 기프트카드 예치금</td>
+                        <td class="font-mono text-gray-500">9411-12**-****-5188</td>
+                        <td class="font-bold">최*정</td>
+                        <td class="font-mono text-gray-500">20760305ss</td>
+                        <td class="text-left pl-6 font-bold text-gray-900">더한옥헤리티지하우스 (숙박)</td>
+                        <td>결제</td>
+                        <td class="text-right pr-6 font-bold text-red-500">- 1,200,000</td>
+                        <td><span class="font-bold text-gray-800">승인</span></td>
+                    </tr>
+                    <tr class="hover:bg-blue-50 transition border-b border-gray-200 bg-gray-50">
+                        <td class="py-3"><input type="checkbox" class="w-3.5 h-3.5 cursor-pointer"></td>
+                        <td class="text-gray-500">2</td>
+                        <td class="font-mono text-gray-600">2026/03/06<br>00:00:52</td>
+                        <td class="font-bold text-gray-800">더한옥헤리티지 기프트카드</td>
+                        <td>더한옥 기프트카드 예치금</td>
+                        <td class="font-mono text-gray-500">9411-12**-****-5204</td>
+                        <td class="font-bold">권*오</td>
+                        <td class="font-mono text-gray-500">20260205a</td>
+                        <td class="text-left pl-6 font-bold text-gray-900">더한옥헤리티지하우스 (F&B)</td>
+                        <td>결제</td>
+                        <td class="text-right pr-6 font-bold text-red-500">- 45,000</td>
+                        <td><span class="font-bold text-gray-800">승인</span></td>
+                    </tr>
+                    <tr class="hover:bg-blue-50 transition border-b border-gray-200">
+                        <td class="py-3"><input type="checkbox" class="w-3.5 h-3.5 cursor-pointer"></td>
+                        <td class="text-gray-500">3</td>
+                        <td class="font-mono text-gray-600">2026/03/05<br>00:01:00</td>
+                        <td class="font-bold text-gray-800">더한옥헤리티지 기프트카드</td>
+                        <td>더한옥 기프트카드 예치금</td>
+                        <td class="font-mono text-gray-500">9411-12**-****-5253</td>
+                        <td class="font-bold">남******혜</td>
+                        <td class="font-mono text-gray-500">20160304a</td>
+                        <td class="text-left pl-6 font-bold text-gray-900">더한옥헤리티지하우스 (스파)</td>
+                        <td>결제</td>
+                        <td class="text-right pr-6 font-bold text-red-500">- 220,000</td>
+                        <td><span class="font-bold text-gray-800">승인</span></td>
+                    </tr>
+                    <tr class="hover:bg-blue-50 transition border-b border-gray-200">
+                        <td class="py-3"><input type="checkbox" class="w-3.5 h-3.5 cursor-pointer"></td>
+                        <td class="text-gray-500">4</td>
+                        <td class="font-mono text-gray-600">2026/03/05<br>00:00:59</td>
+                        <td class="font-bold text-gray-800">더한옥 VIP 기프트카드</td>
+                        <td>VIP 전용 예치금</td>
+                        <td class="font-mono text-gray-500">9411-55**-****-6053</td>
+                        <td class="font-bold">종******우</td>
+                        <td class="font-mono text-gray-500">nh92100226</td>
+                        <td class="text-left pl-6 font-bold text-gray-900">더한옥헤리티지하우스 (숙박)</td>
+                        <td>결제</td>
+                        <td class="text-right pr-6 font-bold text-red-500">- 2,500,000</td>
+                        <td><span class="font-bold text-gray-800">승인</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<style>
+    .animate-fade-in { animation: fadeIn 0.3s ease-in-out; }
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(5px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+</style>

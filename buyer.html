@@ -1,0 +1,216 @@
+<div id="view-buyer-list" class="flex-1 overflow-y-auto p-6 flex flex-col w-full h-full">
+    <div class="flex justify-between items-center mb-4">
+        <h1 class="text-lg font-bold text-gray-900">구매자 관리 <span class="text-xs text-gray-500 font-normal ml-2">등록된 구매자(개인/법인)를 조회하고 관리합니다.</span></h1>
+        <button onclick="openNewBuyerForm()" class="bg-[#121F3D] text-white px-5 py-1.5 rounded-full text-xs font-bold shadow-sm hover:bg-black">+ 신규 구매자 등록</button>
+    </div>
+    
+    <div class="bg-white border border-gray-200 p-5 mb-4 shadow-sm relative text-xs flex flex-col gap-3">
+        <div class="grid grid-cols-12 gap-4 items-center">
+            <div class="col-span-1 font-bold text-gray-700">고객 검색</div>
+            <div class="col-span-8 flex gap-2">
+                <select class="input-kona w-32"><option>이름</option><option>법인명</option><option>휴대폰번호</option></select>
+                <input type="text" class="input-kona flex-1 max-w-sm" placeholder="검색어를 입력해 주세요.">
+            </div>
+            <div class="col-span-1 font-bold text-gray-700 text-right pr-4">구분</div>
+            <div class="col-span-2"><select class="input-kona w-full"><option>전체</option><option>개인</option><option>법인</option></select></div>
+        </div>
+        <div class="flex justify-end pt-4 border-t border-gray-100">
+            <button class="btn-outline px-6 font-bold mr-2">초기화</button>
+            <button class="bg-[#1636d6] text-white px-8 py-1.5 rounded-full font-bold shadow-sm hover:bg-blue-800">조회</button>
+        </div>
+    </div>
+    
+    <div class="flex justify-between items-end mb-2">
+        <div class="text-xs text-gray-600 font-bold">전체 구매자: <span class="text-blue-600 text-sm">124</span>명</div>
+        <button class="border border-gray-300 bg-white text-gray-700 px-4 py-1.5 rounded text-xs font-bold shadow-sm hover:bg-gray-50">↓ 엑셀 다운로드</button>
+    </div>
+
+    <div class="bg-white border border-gray-200 shadow-sm w-full flex-1 relative rounded-lg overflow-hidden">
+        <div class="custom-scrollbar w-full h-full overflow-y-auto">
+            <table class="w-full kona-table min-w-[1200px]">
+                <thead>
+                    <tr><th>NO</th><th>구분</th><th>구매자명</th><th>휴대폰번호</th><th>이메일</th><th>법인명</th><th>사업자번호</th><th>총 주문건수 ▲</th><th>누적 구매금액 ▲</th><th>최초 등록일</th></tr>
+                </thead>
+                <tbody>
+                    <tr class="clickable-row hover:bg-blue-50" onclick="showBuyerDetail('법인', '김코나', '010-9999-8888', 'kona@konai.com', '(주)코나아이', '111-22-33333')">
+                        <td>1</td>
+                        <td><span class="bg-kona-dark text-white px-2 py-0.5 rounded text-[10px] font-bold">법인</span></td>
+                        <td class="font-bold text-blue-600 underline">김코나</td>
+                        <td>010-9999-8888</td>
+                        <td class="text-gray-500">kona@konai.com</td>
+                        <td class="font-bold text-gray-800">(주)코나아이</td>
+                        <td class="font-mono text-gray-500">111-22-33333</td>
+                        <td class="font-bold">15건</td>
+                        <td class="text-right pr-4 font-bold text-blue-800">12,000,000</td>
+                        <td class="text-gray-400">2025/11/01</td>
+                    </tr>
+                    <tr class="clickable-row hover:bg-blue-50" onclick="showBuyerDetail('개인', '홍길동', '010-1234-5678', 'hong@gmail.com', '', '')">
+                        <td>2</td>
+                        <td><span class="bg-blue-600 text-white px-2 py-0.5 rounded text-[10px] font-bold">개인</span></td>
+                        <td class="font-bold text-blue-600 underline">홍길동</td>
+                        <td>010-1234-5678</td>
+                        <td class="text-gray-500">hong@gmail.com</td>
+                        <td class="text-gray-400">-</td>
+                        <td class="text-gray-400">-</td>
+                        <td class="font-bold">2건</td>
+                        <td class="text-right pr-4 font-bold text-blue-800">500,000</td>
+                        <td class="text-gray-400">2026/01/15</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div id="view-buyer-detail" class="flex-1 overflow-y-auto p-6 hidden flex-col w-full h-full">
+    <div class="flex items-center justify-between mb-6">
+        <div class="flex items-center gap-3">
+            <button onclick="switchBuyerView('view-buyer-list')" class="text-gray-400 hover:text-black text-xl leading-none">←</button>
+            <h1 class="text-lg font-bold text-gray-900" id="detail_title">구매자 상세 정보</h1>
+        </div>
+        <div class="flex gap-2">
+            <button onclick="switchBuyerView('view-buyer-list')" class="btn-outline">취소</button>
+            <button class="bg-[#121F3D] text-white px-6 py-1.5 rounded-full text-xs font-bold shadow-sm hover:bg-black" onclick="saveBuyerInfo()">정보 저장</button>
+        </div>
+    </div>
+
+    <h3 class="text-sm font-bold text-gray-800 mb-2">기본 정보</h3>
+    <div class="bg-white border border-gray-300 mb-8 border-t-2 border-t-gray-500">
+        <div class="form-row bg-blue-50/10">
+            <div class="form-label">구매자 구분 *</div>
+            <div class="form-content">
+                <label class="flex items-center gap-1 cursor-pointer"><input type="radio" name="buyerType" id="bt_personal" value="personal" checked onchange="toggleCorpFields()" class="chk-kona"> 개인</label>
+                <label class="flex items-center gap-1 cursor-pointer ml-4"><input type="radio" name="buyerType" id="bt_corp" value="corporate" onchange="toggleCorpFields()" class="chk-kona"> 법인</label>
+            </div>
+        </div>
+        <div id="corp_fields" class="hidden w-full flex-col">
+            <div class="form-row">
+                <div class="form-label">법인명 *</div><div class="form-content"><input type="text" id="bi_corpName" class="input-kona max-w-sm" placeholder="법인명을 입력하세요"></div>
+                <div class="form-label border-l border-e5e7eb">사업자번호</div><div class="form-content"><input type="text" id="bi_corpNum" class="input-kona max-w-xs" placeholder="- 없이 숫자만 입력"></div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-label">구매자(담당자)명 *</div><div class="form-content"><input type="text" id="bi_name" class="input-kona max-w-xs" placeholder="이름을 입력하세요"></div>
+            <div class="form-label border-l border-e5e7eb">휴대폰번호 *</div><div class="form-content"><input type="text" id="bi_phone" class="input-kona max-w-xs" placeholder="- 없이 숫자만 입력"></div>
+        </div>
+        <div class="form-row">
+            <div class="form-label">이메일</div><div class="form-content"><input type="email" id="bi_email" class="input-kona max-w-sm" placeholder="이메일 주소를 입력하세요"></div>
+        </div>
+    </div>
+
+    <div id="history_section" class="hidden flex-col flex-1">
+        <div class="flex items-end gap-4 border-b border-gray-300 mb-4 pb-2">
+            <h3 id="tab_btn_order" class="text-sm font-bold text-blue-800 border-b-2 border-blue-800 pb-2 -mb-[9px] cursor-pointer" onclick="switchHistoryTab('order')">주문 및 결제 내역</h3>
+            <h3 id="tab_btn_card" class="text-sm font-bold text-gray-500 pb-2 -mb-[9px] cursor-pointer hover:text-gray-800" onclick="switchHistoryTab('card')">보유 카드 내역</h3>
+        </div>
+
+        <div id="tab_content_order" class="bg-white border border-gray-200 shadow-sm overflow-hidden rounded-lg mb-6">
+            <table class="w-full text-center text-xs kona-table">
+                <thead class="bg-gray-100"><tr><th>주문일시</th><th>주문번호</th><th>주문 상품명</th><th>결제 금액(원)</th><th>상태</th></tr></thead>
+                <tbody class="text-gray-700">
+                    <tr class="hover:bg-gray-50 border-b"><td>2026/03/15 16:05</td><td class="text-blue-600 underline font-bold cursor-pointer">REQ-260315-02</td><td class="text-left pl-4 font-bold">더한옥헤리티지하우스 상품권 외 7건</td><td class="text-right pr-4 font-bold">3,500,000</td><td><span class="text-green-600 font-bold">발급완료</span></td></tr>
+                    <tr class="hover:bg-gray-50 border-b"><td>2026/02/24 16:05</td><td class="text-blue-600 underline font-bold cursor-pointer">202602242</td><td class="text-left pl-4 font-bold">더한옥 VIP 상품권(1,000,000원)</td><td class="text-right pr-4 font-bold">1,000,000</td><td><span class="text-green-600 font-bold">발급완료</span></td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div id="tab_content_card" class="bg-white border border-gray-200 shadow-sm overflow-hidden rounded-lg mb-6 hidden">
+            <table class="w-full text-center text-xs kona-table">
+                <thead class="bg-gray-100"><tr><th>발급일</th><th>상품명</th><th>카드번호</th><th>현재 잔액(원)</th><th>상태</th></tr></thead>
+                <tbody class="text-gray-700">
+                    <tr class="hover:bg-gray-50 border-b"><td>2026/03/15</td><td class="text-left pl-4 font-bold">더한옥헤리티지하우스 상품권</td><td class="font-mono text-blue-600">9411-1234-5678-0001</td><td class="text-right pr-4 font-bold">500,000</td><td>정상</td></tr>
+                    <tr class="hover:bg-gray-50 border-b"><td>2026/02/24</td><td class="text-left pl-4 font-bold">더한옥 VIP 상품권</td><td class="font-mono text-blue-600">9411-5555-6666-0001</td><td class="text-right pr-4 font-bold">150,000</td><td>정상</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+    // 1. 화면 전환 함수 (구매자 관리 내부용)
+    function switchBuyerView(viewId) {
+        document.getElementById('view-buyer-list').classList.add('hidden');
+        document.getElementById('view-buyer-list').classList.remove('flex');
+        document.getElementById('view-buyer-detail').classList.add('hidden');
+        document.getElementById('view-buyer-detail').classList.remove('flex');
+        
+        document.getElementById(viewId).classList.remove('hidden'); 
+        document.getElementById(viewId).classList.add('flex');
+    }
+
+    // 2. 법인/개인 라디오 토글
+    function toggleCorpFields() {
+        const isCorp = document.getElementById('bt_corp').checked;
+        document.getElementById('corp_fields').style.display = isCorp ? 'flex' : 'none';
+    }
+
+    // 3. 신규 구매자 등록 폼 열기
+    function openNewBuyerForm() {
+        document.getElementById('detail_title').innerText = '신규 구매자 등록';
+        document.getElementById('bt_personal').checked = true; 
+        toggleCorpFields();
+        
+        // 폼 초기화
+        document.getElementById('bi_corpName').value = '';
+        document.getElementById('bi_corpNum').value = '';
+        document.getElementById('bi_name').value = '';
+        document.getElementById('bi_phone').value = '';
+        document.getElementById('bi_email').value = '';
+        
+        // 히스토리 숨김 (신규등록이므로 내역이 없음)
+        document.getElementById('history_section').classList.add('hidden');
+        document.getElementById('history_section').classList.remove('flex');
+        
+        switchBuyerView('view-buyer-detail');
+    }
+
+    // 4. 구매자 상세 정보 열기 (데이터 바인딩)
+    function showBuyerDetail(type, name, phone, email, corpName, corpNum) {
+        document.getElementById('detail_title').innerText = '구매자 상세 정보';
+        
+        if(type === '법인') { document.getElementById('bt_corp').checked = true; } 
+        else { document.getElementById('bt_personal').checked = true; }
+        toggleCorpFields();
+        
+        document.getElementById('bi_corpName').value = corpName || '';
+        document.getElementById('bi_corpNum').value = corpNum || '';
+        document.getElementById('bi_name').value = name;
+        document.getElementById('bi_phone').value = phone;
+        document.getElementById('bi_email').value = email;
+
+        // 히스토리 노출 및 탭 초기화
+        document.getElementById('history_section').classList.remove('hidden');
+        document.getElementById('history_section').classList.add('flex');
+        switchHistoryTab('order');
+
+        switchBuyerView('view-buyer-detail');
+    }
+
+    // 5. 주문/보유 내역 탭 전환 로직
+    function switchHistoryTab(tab) {
+        const tabOrder = document.getElementById('tab_content_order');
+        const tabCard = document.getElementById('tab_content_card');
+        const btnOrder = document.getElementById('tab_btn_order');
+        const btnCard = document.getElementById('tab_btn_card');
+
+        if(tab === 'order') {
+            tabOrder.classList.remove('hidden'); 
+            tabCard.classList.add('hidden');
+            btnOrder.className = "text-sm font-bold text-blue-800 border-b-2 border-blue-800 pb-2 -mb-[9px] cursor-pointer";
+            btnCard.className = "text-sm font-bold text-gray-500 pb-2 -mb-[9px] cursor-pointer hover:text-gray-800";
+        } else {
+            tabOrder.classList.add('hidden'); 
+            tabCard.classList.remove('hidden');
+            btnOrder.className = "text-sm font-bold text-gray-500 pb-2 -mb-[9px] cursor-pointer hover:text-gray-800";
+            btnCard.className = "text-sm font-bold text-blue-800 border-b-2 border-blue-800 pb-2 -mb-[9px] cursor-pointer";
+        }
+    }
+
+    // 6. 정보 저장 버튼 이벤트
+    function saveBuyerInfo() {
+        const name = document.getElementById('bi_name').value;
+        if(!name) { alert('구매자(담당자)명을 입력해주세요.'); return; }
+        alert('구매자 정보가 성공적으로 저장되었습니다.');
+        switchBuyerView('view-buyer-list');
+    }
+</script>

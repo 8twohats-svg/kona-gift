@@ -1,0 +1,386 @@
+<div id="view-card-order-list" class="flex-1 overflow-y-auto p-6 flex flex-col w-full h-full animate-fade-in bg-[#F4F5F8]">
+    
+    <div class="flex justify-between items-center mb-4">
+        <div class="flex items-center gap-3">
+            <h1 class="text-xl font-bold text-gray-900">카드 주문 관리 <span class="w-4 h-4 bg-gray-800 text-white rounded-full inline-flex items-center justify-center text-[10px] font-bold cursor-pointer ml-1">?</span></h1>
+            <button class="border border-gray-300 bg-white text-gray-600 py-1 px-2 rounded text-xs hover:bg-gray-50 transition flex items-center gap-1" onclick="window.open('#')">
+                매뉴얼 바로가기 
+                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+            </button>
+        </div>
+        <div class="flex items-center gap-3">
+            <label class="flex items-center gap-2 cursor-pointer">
+                <span class="text-xs text-blue-600 font-bold">조회 후 닫힘</span>
+                <span class="bg-gray-200 text-gray-500 px-3 py-1 rounded-full text-xs font-bold shadow-inner">OFF</span>
+            </label>
+            <button class="bg-white border border-gray-300 text-gray-800 px-4 py-1.5 rounded-full text-[13px] font-bold shadow-sm hover:bg-gray-50 transition flex items-center gap-1" onclick="openNewOrderForm()">
+                💳 카드주문
+            </button>
+            <button class="bg-[#121F3D] text-white w-7 h-7 rounded-full font-bold flex items-center justify-center hover:bg-black transition">X</button>
+        </div>
+    </div>
+
+    <div class="bg-white border border-gray-200 p-5 mb-6 shadow-sm relative text-xs flex flex-col gap-3 rounded">
+        <div class="grid grid-cols-12 gap-4 items-center">
+            <div class="col-span-1 font-bold text-gray-700">주문 번호</div>
+            <div class="col-span-8">
+                <input type="text" class="input-kona w-full" placeholder="주문번호를 입력해 주세요.">
+            </div>
+            <div class="col-span-1 font-bold text-gray-700 text-right pr-4">결제 방식</div>
+            <div class="col-span-2">
+                <select class="input-kona w-full font-medium"><option>전체</option><option>무통장입금</option><option>법인카드</option></select>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-12 gap-4 items-center">
+            <div class="col-span-1 font-bold text-gray-700">주문 기간</div>
+            <div class="col-span-11 flex gap-2 items-center">
+                <input type="date" class="input-kona w-40 text-gray-600"> 
+                <span class="text-gray-400">~</span> 
+                <input type="date" class="input-kona w-40 text-gray-600">
+                <div class="flex gap-1 ml-1">
+                    <button class="bg-[#1A1A1A] text-white px-4 py-1.5 rounded-full shadow-sm font-bold">전체</button>
+                    <button class="border border-gray-300 bg-white text-gray-600 px-4 py-1.5 rounded-full hover:bg-gray-50">당일</button>
+                    <button class="border border-gray-300 bg-white text-gray-600 px-4 py-1.5 rounded-full hover:bg-gray-50">전일</button>
+                    <button class="border border-gray-300 bg-white text-gray-600 px-4 py-1.5 rounded-full hover:bg-gray-50">당월</button>
+                    <button class="border border-gray-300 bg-white text-gray-600 px-4 py-1.5 rounded-full hover:bg-gray-50">3개월</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-12 gap-4 items-center">
+            <div class="col-span-1 font-bold text-gray-700">주문 상태</div>
+            <div class="col-span-3">
+                <select class="input-kona w-full font-medium"><option>전체</option><option>결제 완료</option><option>제작중</option><option>배송중</option></select>
+            </div>
+            <div class="col-span-1 font-bold text-gray-700 text-center">상품명</div>
+            <div class="col-span-4">
+                <select class="input-kona w-full font-medium"><option>전체</option><option>더한옥헤리티지 기프트카드</option><option>더한옥 VIP 기프트카드</option></select>
+            </div>
+            <div class="col-span-1 font-bold text-gray-700 text-right pr-4">상품유형</div>
+            <div class="col-span-2">
+                <select class="input-kona w-full font-medium"><option>전체</option><option>기프트카드</option></select>
+            </div>
+        </div>
+
+        <div class="flex justify-end gap-2 mt-2 pt-4 border-t border-gray-100">
+            <button class="btn-outline px-6 py-2 rounded-full font-bold">초기화</button>
+            <button class="bg-[#1636d6] text-white px-8 py-2 rounded-full font-bold shadow-sm hover:bg-blue-800 transition">조회</button>
+        </div>
+    </div>
+
+    <div class="mb-4 text-[13px] font-bold text-gray-700">- 최근 3개월 카드 주문 현황</div>
+    <div class="flex items-center gap-2 mb-6">
+        <div class="flex-1 bg-gray-100 border border-gray-200 rounded-lg flex items-center p-4">
+            <div class="text-gray-400 mr-4"><svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg></div>
+            <div class="flex flex-col flex-1 items-center justify-center">
+                <span class="text-2xl font-bold text-gray-600">0</span>
+                <span class="text-xs text-gray-500 font-bold mt-1">신청 완료</span>
+            </div>
+        </div>
+        <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+        
+        <div class="flex-1 bg-gray-100 border border-gray-200 rounded-lg flex items-center p-4">
+            <div class="text-gray-400 mr-4"><svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg></div>
+            <div class="flex flex-col flex-1 items-center justify-center">
+                <span class="text-2xl font-bold text-gray-600">0</span>
+                <span class="text-xs text-gray-500 font-bold mt-1">결제 완료</span>
+            </div>
+        </div>
+        <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+
+        <div class="flex-1 bg-gray-100 border border-gray-200 rounded-lg flex items-center p-4">
+            <div class="text-gray-400 mr-4"><svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg></div>
+            <div class="flex flex-col flex-1 items-center justify-center">
+                <span class="text-2xl font-bold text-gray-600">0</span>
+                <span class="text-xs text-gray-500 font-bold mt-1">디자인 완료</span>
+            </div>
+        </div>
+        <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+
+        <div class="flex-1 bg-gray-100 border border-gray-200 rounded-lg flex items-center p-4">
+            <div class="text-gray-400 mr-4"><svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg></div>
+            <div class="flex flex-col flex-1 items-center justify-center">
+                <span class="text-2xl font-bold text-amber-500">1</span>
+                <span class="text-xs text-gray-800 font-bold mt-1">제작중</span>
+            </div>
+        </div>
+        <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+
+        <div class="flex-1 bg-gray-100 border border-gray-200 rounded-lg flex items-center p-4">
+            <div class="text-gray-400 mr-4"><svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg></div>
+            <div class="flex flex-col flex-1 items-center justify-center">
+                <span class="text-2xl font-bold text-gray-600">0</span>
+                <span class="text-xs text-gray-500 font-bold mt-1">배송중</span>
+            </div>
+        </div>
+        <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+
+        <div class="flex-1 bg-white border border-blue-300 rounded-lg flex items-center p-4 shadow-sm">
+            <div class="text-blue-600 mr-4"><svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path></svg></div>
+            <div class="flex flex-col flex-1 items-center justify-center">
+                <span class="text-2xl font-bold text-blue-700">1</span>
+                <span class="text-xs text-blue-800 font-bold mt-1">수령완료</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="flex justify-between items-end mb-2">
+        <div class="flex items-center gap-3 text-[13px]">
+            <span class="font-bold text-gray-800">전체 <span class="text-blue-600">2</span></span>
+        </div>
+        <select class="input-kona py-1 w-28 text-xs font-medium bg-white"><option>50개씩 보기</option></select>
+    </div>
+
+    <div class="bg-white border border-gray-200 shadow-sm w-full flex-1 relative overflow-hidden" style="border-radius: 4px;">
+        <div class="custom-scrollbar w-full h-full overflow-y-auto">
+            <table class="w-full text-center text-xs kona-table min-w-[1600px]">
+                <thead class="bg-[#121F3D] text-white">
+                    <tr>
+                        <th class="py-3">NO</th>
+                        <th class="py-3">주문번호</th>
+                        <th class="py-3">주문일시</th>
+                        <th class="py-3">상품명</th>
+                        <th class="py-3">상품 유형</th>
+                        <th class="py-3">발급 유형</th>
+                        <th class="py-3">카드 이름 표기</th>
+                        <th class="py-3">카드 수</th>
+                        <th class="py-3 text-right pr-4">결제금액</th>
+                        <th class="py-3">결제 방식</th>
+                        <th class="py-3">주문자명</th>
+                        <th class="py-3">주문 상태</th>
+                        <th class="py-3">예상수령일</th>
+                        <th class="py-3">주문 취소</th>
+                    </tr>
+                </thead>
+                <tbody class="text-gray-700 bg-white">
+                    <tr class="hover:bg-blue-50 cursor-pointer transition border-b border-gray-200" onclick="showOrderDetail('260312A01', '더한옥헤리티지 기프트카드', '제작중', '1,000')">
+                        <td class="py-3.5">1</td>
+                        <td class="font-mono text-blue-600 font-bold underline">260312A01</td>
+                        <td class="text-gray-500">2026/03/12<br>09:09</td>
+                        <td class="font-bold text-gray-800 text-left pl-4">더한옥헤리티지 기프트카드</td>
+                        <td>기프트카드</td>
+                        <td>실물카드</td>
+                        <td class="text-gray-400">-</td>
+                        <td class="font-bold text-blue-800">1,000</td>
+                        <td class="font-bold text-right pr-4">-</td>
+                        <td class="text-gray-500">-</td>
+                        <td class="font-bold">종*우</td>
+                        <td class="font-bold text-gray-800">제작중</td>
+                        <td class="text-gray-400">-</td>
+                        <td class="text-gray-400">-</td>
+                    </tr>
+                    <tr class="hover:bg-blue-50 cursor-pointer transition border-b border-gray-200 bg-gray-50" onclick="showOrderDetail('260215A02', '더한옥 VIP 기프트카드', '수령 완료', '500')">
+                        <td class="py-3.5">2</td>
+                        <td class="font-mono text-blue-600 font-bold underline">260215A02</td>
+                        <td class="text-gray-500">2026/02/15<br>17:19</td>
+                        <td class="font-bold text-gray-800 text-left pl-4">더한옥 VIP 기프트카드</td>
+                        <td>기프트카드</td>
+                        <td>실물카드</td>
+                        <td class="text-gray-400">-</td>
+                        <td class="font-bold text-blue-800">500</td>
+                        <td class="font-bold text-right pr-4">5,000,000</td>
+                        <td class="text-gray-500">무상</td>
+                        <td class="font-bold">종*우</td>
+                        <td class="font-bold text-gray-800">수령 완료</td>
+                        <td class="text-gray-600 font-medium">2026/02/20</td>
+                        <td class="text-gray-400">-</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div id="view-card-order-detail" class="flex-1 overflow-y-auto p-6 hidden flex-col w-full h-full animate-fade-in bg-[#F4F5F8]">
+    
+    <div class="flex items-center justify-between mb-6">
+        <div class="flex items-center gap-3">
+            <button onclick="switchCardOrderView('view-card-order-list')" class="text-gray-400 hover:text-black text-xl leading-none transition">←</button>
+            <h1 class="text-xl font-bold text-gray-900" id="ord_detail_title">카드 주문 상세</h1>
+        </div>
+        <div class="flex gap-2" id="ord_btn_group">
+            <button onclick="switchCardOrderView('view-card-order-list')" class="btn-outline">목록</button>
+            <button class="bg-[#121F3D] text-white px-6 py-1.5 rounded-full text-[13px] font-bold shadow-sm hover:bg-black transition" onclick="saveCardOrder()">주문 저장</button>
+        </div>
+    </div>
+
+    <div class="bg-white border border-gray-200 shadow-sm rounded-lg flex flex-col mb-6 overflow-hidden">
+        <div class="bg-gray-50 px-6 py-3 border-b border-gray-200 font-bold text-[15px] text-gray-800 flex items-center justify-between">
+            <span>- 주문 기본 정보</span>
+            <span id="ord_status_badge" class="bg-white text-[#121F3D] px-2 py-0.5 rounded text-[11px] border border-gray-300 font-bold hidden">상태 뱃지</span>
+        </div>
+        <div class="grid grid-cols-2 text-[13px] text-gray-800">
+            <div class="border-r border-gray-200 flex flex-col">
+                <div class="flex border-b border-gray-200 min-h-[44px]" id="row_ord_num" style="display: none;">
+                    <div class="bg-gray-50 w-36 p-3 flex items-center font-medium text-gray-600 border-r border-gray-200 shrink-0">주문번호</div>
+                    <div class="p-3 flex items-center font-mono font-bold text-blue-600" id="inp_ord_num">260312A01</div>
+                </div>
+                <div class="flex border-b border-gray-200 min-h-[44px]">
+                    <div class="bg-gray-50 w-36 p-3 flex items-center font-medium text-gray-600 border-r border-gray-200 shrink-0">주문명 *</div>
+                    <div class="p-3 flex items-center w-full">
+                        <input type="text" id="inp_ord_name" class="input-kona w-full font-bold" placeholder="예: 3월 정기 재고 확보">
+                    </div>
+                </div>
+                <div class="flex border-b border-gray-200 min-h-[44px]">
+                    <div class="bg-gray-50 w-36 p-3 flex items-center font-medium text-gray-600 border-r border-gray-200 shrink-0">대상 상품 *</div>
+                    <div class="p-3 flex items-center w-full">
+                        <select id="inp_ord_prod" class="input-kona w-full font-bold">
+                            <option value="hanok_basic">더한옥헤리티지 기프트카드</option>
+                            <option value="hanok_vip">더한옥 VIP 기프트카드</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="flex min-h-[44px]">
+                    <div class="bg-gray-50 w-36 p-3 flex items-center font-medium text-gray-600 border-r border-gray-200 shrink-0">주문 수량 *</div>
+                    <div class="p-3 flex items-center gap-2">
+                        <input type="text" id="inp_ord_qty" class="input-kona w-32 text-right font-bold text-blue-700" placeholder="0">
+                        <span class="text-gray-500 font-bold">장</span>
+                        <span class="text-[10px] text-gray-400 ml-2">※ 최소 주문 단위는 100장입니다.</span>
+                    </div>
+                </div>
+            </div>
+            <div class="flex flex-col">
+                <div class="flex border-b border-gray-200 min-h-[44px]">
+                    <div class="bg-gray-50 w-36 p-3 flex items-center font-medium text-gray-600 border-r border-gray-200 shrink-0">주문자명 *</div>
+                    <div class="p-3 flex items-center w-full">
+                        <input type="text" id="inp_ord_manager" class="input-kona w-48" value="종*우" readonly disabled>
+                    </div>
+                </div>
+                <div class="flex border-b border-gray-200 min-h-[44px]">
+                    <div class="bg-gray-50 w-36 p-3 flex items-center font-medium text-gray-600 border-r border-gray-200 shrink-0">연락처 *</div>
+                    <div class="p-3 flex items-center w-full">
+                        <input type="text" id="inp_ord_phone" class="input-kona w-48" value="010-1234-5678">
+                    </div>
+                </div>
+                <div class="flex min-h-[88px] h-full">
+                    <div class="bg-gray-50 w-36 p-3 flex items-start pt-4 font-medium text-gray-600 border-r border-gray-200 shrink-0">요청사항</div>
+                    <div class="p-3 flex items-center w-full h-full">
+                        <textarea id="inp_ord_memo" class="input-kona w-full h-full resize-none leading-relaxed" placeholder="제작/배송 시 특별 요청사항을 입력하세요."></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-white border border-gray-200 shadow-sm rounded-lg flex flex-col mb-8 overflow-hidden">
+        <div class="bg-gray-50 px-6 py-3 border-b border-gray-200 font-bold text-[15px] text-gray-800 flex items-center">
+            - 배송 정보
+        </div>
+        <div class="grid grid-cols-2 text-[13px] text-gray-800">
+            <div class="border-r border-gray-200 flex flex-col">
+                <div class="flex min-h-[44px] h-full">
+                    <div class="bg-gray-50 w-36 p-3 flex items-center font-medium text-gray-600 border-r border-gray-200 shrink-0">수령지 주소 *</div>
+                    <div class="p-3 flex flex-col gap-2 w-full justify-center">
+                        <div class="flex gap-2">
+                            <input type="text" class="input-kona w-24 bg-gray-50" value="07320" readonly placeholder="우편번호">
+                            <button class="border border-gray-300 px-3 py-1 rounded text-[11px] bg-white hover:bg-gray-50 font-bold">주소 검색</button>
+                        </div>
+                        <input type="text" class="input-kona w-full bg-gray-50" value="서울시 영등포구 여의도동 123" readonly>
+                        <input type="text" class="input-kona w-full" placeholder="상세 주소 입력" value="더한옥타워 5층 경영지원팀">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="flex flex-col relative">
+                <div id="overlay_shipping" class="absolute inset-0 bg-white/70 z-10 flex items-center justify-center backdrop-blur-[1px]">
+                    <span class="bg-gray-800 text-white px-4 py-2 rounded-full text-xs font-bold shadow-lg">제작이 완료된 후 배송 정보가 입력됩니다.</span>
+                </div>
+                <div class="flex border-b border-gray-200 min-h-[44px]">
+                    <div class="bg-gray-50 w-36 p-3 flex items-center font-medium text-gray-600 border-r border-gray-200 shrink-0">예상 수령일</div>
+                    <div class="p-3 flex items-center w-full font-bold" id="inp_del_date">-</div>
+                </div>
+                <div class="flex min-h-[44px] h-full">
+                    <div class="bg-gray-50 w-36 p-3 flex items-center font-medium text-gray-600 border-r border-gray-200 shrink-0">운송장 번호</div>
+                    <div class="p-3 flex items-center w-full gap-2">
+                        <input type="text" id="inp_del_track" class="input-kona w-full max-w-[200px] font-mono font-bold bg-gray-50" readonly placeholder="- 없이 숫자만 입력">
+                        <button class="border border-blue-200 bg-blue-50 text-blue-700 px-3 py-1.5 rounded text-[11px] font-bold hover:bg-blue-100 transition whitespace-nowrap">배송 조회</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .animate-fade-in { animation: fadeIn 0.2s ease-in-out; }
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(5px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+</style>
+
+<script>
+    // 화면 전환 제어 함수
+    function switchCardOrderView(viewId) {
+        document.getElementById('view-card-order-list').classList.add('hidden');
+        document.getElementById('view-card-order-list').classList.remove('flex');
+        document.getElementById('view-card-order-detail').classList.add('hidden');
+        document.getElementById('view-card-order-detail').classList.remove('flex');
+        
+        const target = document.getElementById(viewId);
+        if(target) {
+            target.classList.remove('hidden'); 
+            target.classList.add('flex');
+        }
+    }
+
+    // 신규 주문 폼 열기
+    function openNewOrderForm() {
+        document.getElementById('ord_detail_title').innerText = '신규 카드 주문';
+        document.getElementById('row_ord_num').style.display = 'none';
+        document.getElementById('ord_status_badge').classList.add('hidden');
+        
+        document.getElementById('inp_ord_name').value = '';
+        document.getElementById('inp_ord_qty').value = '';
+        document.getElementById('inp_ord_memo').value = '';
+        
+        document.getElementById('overlay_shipping').style.display = 'flex';
+        
+        switchCardOrderView('view-card-order-detail');
+    }
+
+    // 주문 상세 데이터 바인딩
+    function showOrderDetail(ordId, prod, statusText, qty) {
+        document.getElementById('ord_detail_title').innerText = '카드 주문 상세';
+        document.getElementById('row_ord_num').style.display = 'flex';
+        document.getElementById('inp_ord_num').innerText = ordId;
+        
+        document.getElementById('inp_ord_name').value = "기프트카드 재고 확보용 정기 발주";
+        document.getElementById('inp_ord_qty').value = qty;
+        
+        if(prod.includes('VIP')) document.getElementById('inp_ord_prod').value = 'hanok_vip';
+        else document.getElementById('inp_ord_prod').value = 'hanok_basic';
+
+        // 상태 뱃지 제어
+        const badge = document.getElementById('ord_status_badge');
+        badge.classList.remove('hidden');
+        badge.innerText = statusText;
+        
+        const overlay = document.getElementById('overlay_shipping');
+
+        if(statusText === '수령 완료') {
+            overlay.style.display = 'none';
+            document.getElementById('inp_del_date').innerText = '2026/02/20';
+            document.getElementById('inp_del_track').value = '111122223333 (우체국택배)';
+        } else {
+            overlay.style.display = 'flex';
+            document.getElementById('inp_del_date').innerText = '-';
+            document.getElementById('inp_del_track').value = '';
+        }
+
+        switchCardOrderView('view-card-order-detail');
+    }
+
+    // 저장
+    function saveCardOrder() {
+        const qty = document.getElementById('inp_ord_qty').value.replace(/,/g, '');
+        if(!qty || parseInt(qty) < 100) {
+            alert('주문 수량은 최소 100장 이상 입력해야 합니다.');
+            document.getElementById('inp_ord_qty').focus();
+            return;
+        }
+        alert('카드 재고 주문이 정상적으로 등록되었습니다.');
+        switchCardOrderView('view-card-order-list');
+    }
+</script>

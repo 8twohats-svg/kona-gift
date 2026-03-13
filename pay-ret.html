@@ -1,0 +1,315 @@
+<div id="view-payret-list" class="flex-1 overflow-y-auto p-6 flex flex-col w-full h-full animate-fade-in bg-[#F4F5F8]">
+    
+    <div class="flex justify-between items-center mb-4">
+        <div class="flex items-center gap-3">
+            <h1 class="text-xl font-bold text-gray-900">지급/회수 관리</h1>
+            <button class="border border-gray-300 bg-white text-gray-600 py-1 px-2 rounded text-xs hover:bg-gray-50 transition flex items-center gap-1" onclick="window.open('#')">
+                매뉴얼 바로가기 
+                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+            </button>
+        </div>
+        <div class="flex items-center gap-3">
+            <label class="flex items-center gap-2 cursor-pointer">
+                <span class="text-xs text-blue-600 font-bold">조회 후 닫힘</span>
+                <span class="bg-gray-200 text-gray-500 px-3 py-1 rounded-full text-xs font-bold shadow-inner">OFF</span>
+            </label>
+            <button class="bg-white border border-gray-300 text-gray-800 px-4 py-1.5 rounded-full text-[13px] font-bold shadow-sm hover:bg-gray-50 transition flex items-center gap-1" onclick="alert('신규 지급/회수 등록 팝업이 열립니다.')">
+                📋 등록
+            </button>
+            <button class="bg-[#121F3D] text-white w-7 h-7 rounded-full font-bold flex items-center justify-center hover:bg-black transition">X</button>
+        </div>
+    </div>
+
+    <div class="bg-white border border-gray-200 p-5 mb-6 shadow-sm relative text-xs flex flex-col gap-3 rounded">
+        <div class="grid grid-cols-12 gap-4 items-center">
+            <div class="col-span-1 font-bold text-gray-700">상품명</div>
+            <div class="col-span-7">
+                <select class="input-kona w-full font-medium">
+                    <option>더한옥헤리티지 기프트카드</option>
+                    <option>더한옥 VIP 기프트카드</option>
+                </select>
+            </div>
+            <div class="col-span-1 font-bold text-gray-700 text-right pr-4">지급/회수 분류</div>
+            <div class="col-span-3">
+                <select class="input-kona w-full font-medium"><option>전체</option><option>금액 지급(충전)</option><option>금액 회수</option></select>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-12 gap-4 items-center">
+            <div class="col-span-1 font-bold text-gray-700">기간</div>
+            <div class="col-span-7 flex gap-2 items-center">
+                <select class="input-kona w-32 font-medium bg-gray-50"><option>실행일</option><option>등록일</option></select>
+                <input type="date" class="input-kona w-32 text-gray-600" value="2026-02-12"> 
+                <span class="text-gray-400">~</span> 
+                <input type="date" class="input-kona w-32 text-gray-600">
+            </div>
+            <div class="col-span-1 font-bold text-gray-700 text-right pr-4">지급/회수 상태</div>
+            <div class="col-span-3">
+                <select class="input-kona w-full font-medium"><option>전체</option><option>대기</option><option>완료</option><option>실패</option></select>
+            </div>
+        </div>
+
+        <div class="flex justify-end gap-2 mt-2 pt-4 border-t border-gray-100">
+            <button class="btn-outline px-6 py-2 rounded-full font-bold">초기화</button>
+            <button class="bg-[#1636d6] text-white px-8 py-2 rounded-full font-bold shadow-sm hover:bg-blue-800 transition">조회</button>
+        </div>
+    </div>
+
+    <div class="flex justify-between items-end mb-2">
+        <div class="flex items-center gap-3 text-xs">
+            <button class="text-blue-600 font-bold hover:underline flex items-center gap-1" onclick="alert('목록이 엑셀로 다운로드 됩니다.')">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>다운로드
+            </button> 
+            <span class="text-gray-300">|</span> 
+            <span class="font-bold text-gray-800">전체 <span class="text-kona-blue text-sm">4</span></span>
+        </div>
+        <select class="input-kona py-1 w-28 text-xs font-medium bg-white"><option>50개씩 보기</option></select>
+    </div>
+
+    <div class="bg-white border border-gray-200 shadow-sm w-full flex-1 relative rounded-lg overflow-hidden">
+        <div class="custom-scrollbar w-full h-full overflow-y-auto">
+            <table class="w-full text-center text-xs kona-table min-w-[1800px]">
+                <thead class="bg-[#121F3D] text-white">
+                    <tr>
+                        <th class="py-3">NO</th>
+                        <th class="py-3">실행번호</th>
+                        <th class="py-3">등록 방식</th>
+                        <th class="py-3">상품명</th>
+                        <th class="py-3">지급/회수 분류</th>
+                        <th class="py-3 text-left pl-6">사유</th>
+                        <th class="py-3">대상</th>
+                        <th class="py-3">성공</th>
+                        <th class="py-3">실패</th>
+                        <th class="py-3 text-right pr-6">합계 금액 <span class="bg-gray-800 text-white rounded-full w-3 h-3 inline-flex items-center justify-center text-[8px] cursor-help">?</span></th>
+                        <th class="py-3">지급/회수 상태</th>
+                        <th class="py-3">등록자 명</th>
+                        <th class="py-3">등록 일시</th>
+                        <th class="py-3">실행 일시</th>
+                        <th class="py-3">유효기간</th>
+                        <th class="py-3">취소일시</th>
+                    </tr>
+                </thead>
+                <tbody class="text-gray-700 bg-white">
+                    <tr class="hover:bg-blue-50 cursor-pointer transition border-b border-gray-200" onclick="showPayRetDetail('260312-8281', '금액 지급(충전)', '3월 봄맞이 프로모션 이벤트 추가 충전', '완료', '종*우', '2026/03/12 13:25:24', '2026/03/12 13:26:00', '26년봄이벤트', '2026/04/30')">
+                        <td class="py-3.5">1</td>
+                        <td class="font-mono text-gray-500">260312-8281</td>
+                        <td>일괄</td>
+                        <td class="font-bold text-blue-600 underline">더한옥헤리티지 기프트카드</td>
+                        <td class="font-bold text-blue-600 underline">금액 지급</td>
+                        <td class="text-left pl-6">3월 봄맞이 프로모션 이벤트 추가 충전</td>
+                        <td class="font-bold">50</td>
+                        <td class="font-bold text-blue-600">50</td>
+                        <td class="font-bold text-red-500">0</td>
+                        <td class="font-bold text-right pr-6">2,500,000</td>
+                        <td class="font-bold text-gray-800">완료</td>
+                        <td>종*우</td>
+                        <td class="text-gray-500">2026/03/12<br>13:25:24</td>
+                        <td class="text-gray-500">2026/03/12<br>13:26:00</td>
+                        <td>2026/04/30</td>
+                        <td class="text-gray-400">-</td>
+                    </tr>
+                    <tr class="hover:bg-blue-50 cursor-pointer transition border-b border-gray-200 bg-gray-50" onclick="showPayRetDetail('260310-6384', '금액 회수', '결제 취소에 따른 오지급금 회수', '완료', '추*빈', '2026/03/10 08:53:37', '2026/03/10 08:54:00', '-', '-')">
+                        <td class="py-3.5">2</td>
+                        <td class="font-mono text-gray-500">260310-6384</td>
+                        <td>개별</td>
+                        <td class="font-bold text-blue-600 underline">더한옥 VIP 기프트카드</td>
+                        <td class="font-bold text-red-500 underline">금액 회수</td>
+                        <td class="text-left pl-6">결제 취소에 따른 오지급금 회수</td>
+                        <td class="font-bold">1</td>
+                        <td class="font-bold text-blue-600">1</td>
+                        <td class="font-bold text-red-500">0</td>
+                        <td class="font-bold text-right pr-6 text-red-500">- 50,000</td>
+                        <td class="font-bold text-gray-800">완료</td>
+                        <td>추*빈</td>
+                        <td class="text-gray-500">2026/03/10<br>08:53:37</td>
+                        <td class="text-gray-500">2026/03/10<br>08:54:00</td>
+                        <td class="text-gray-400">-</td>
+                        <td class="text-gray-400">-</td>
+                    </tr>
+                    <tr class="hover:bg-blue-50 cursor-pointer transition border-b border-gray-200" onclick="showPayRetDetail('260305-6385', '금액 지급(충전)', '고객 클레임 보상 지급', '완료', '종*우', '2026/03/05 10:12:15', '2026/03/05 10:13:00', '고객보상', '12 개월')">
+                        <td class="py-3.5">3</td>
+                        <td class="font-mono text-gray-500">260305-6385</td>
+                        <td>개별</td>
+                        <td class="font-bold text-blue-600 underline">더한옥헤리티지 기프트카드</td>
+                        <td class="font-bold text-blue-600 underline">금액 지급</td>
+                        <td class="text-left pl-6">고객 클레임 보상 지급</td>
+                        <td class="font-bold">1</td>
+                        <td class="font-bold text-blue-600">1</td>
+                        <td class="font-bold text-red-500">0</td>
+                        <td class="font-bold text-right pr-6">30,000</td>
+                        <td class="font-bold text-gray-800">완료</td>
+                        <td>종*우</td>
+                        <td class="text-gray-500">2026/03/05<br>10:12:15</td>
+                        <td class="text-gray-500">2026/03/05<br>10:13:00</td>
+                        <td>12 개월</td>
+                        <td class="text-gray-400">-</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div id="view-payret-detail" class="flex-1 overflow-y-auto p-6 hidden flex-col w-full h-full animate-fade-in bg-[#F4F5F8]">
+    
+    <div class="flex items-center justify-between mb-6">
+        <div class="flex items-center gap-3">
+            <h1 class="text-xl font-bold text-gray-900">지급 / 회수</h1>
+        </div>
+        <button class="bg-white border border-gray-300 text-gray-800 px-5 py-1.5 rounded-full text-[13px] font-bold shadow-sm hover:bg-gray-50 transition" onclick="alert('개인정보 마스킹이 해제됩니다.')">마스킹 해제</button>
+    </div>
+
+    <div class="bg-white border-t-2 border-[#121F3D] shadow-sm mb-8 overflow-hidden w-full text-[13px] border-b border-l border-r border-gray-200">
+        <div class="flex border-b border-gray-200">
+            <div class="bg-gray-50 w-40 p-3.5 flex items-center font-bold text-gray-700 border-r border-gray-200 shrink-0">상품명</div>
+            <div class="p-3.5 flex items-center w-1/2 border-r border-gray-200" id="dtl_pr_prod">더한옥헤리티지 기프트카드</div>
+            <div class="bg-gray-50 w-40 p-3.5 flex items-center font-bold text-gray-700 border-r border-gray-200 shrink-0">지급/회수 분류</div>
+            <div class="p-3.5 flex items-center w-1/2 font-bold text-blue-700" id="dtl_pr_type">금액 지급(충전)</div>
+        </div>
+        <div class="flex border-b border-gray-200">
+            <div class="bg-gray-50 w-40 p-3.5 flex items-center font-bold text-gray-700 border-r border-gray-200 shrink-0">지급 사유</div>
+            <div class="p-3.5 flex items-center w-1/2 border-r border-gray-200" id="dtl_pr_reason">3월 봄맞이 프로모션 이벤트 추가 충전</div>
+            <div class="bg-gray-50 w-40 p-3.5 flex items-center font-bold text-gray-700 border-r border-gray-200 shrink-0">카드포인트/잔액명</div>
+            <div class="p-3.5 flex items-center w-1/2 text-gray-600">더한옥 기프트카드 예치금</div>
+        </div>
+        <div class="flex border-b border-gray-200">
+            <div class="bg-gray-50 w-40 p-3.5 flex items-center font-bold text-gray-700 border-r border-gray-200 shrink-0">지급/회수 상태</div>
+            <div class="p-3.5 flex items-center w-full font-bold text-gray-900" id="dtl_pr_status">완료</div>
+        </div>
+        <div class="flex border-b border-gray-200">
+            <div class="bg-gray-50 w-40 p-3.5 flex items-center font-bold text-gray-700 border-r border-gray-200 shrink-0">신청인</div>
+            <div class="p-3.5 flex items-center flex-1 border-r border-gray-200" id="dtl_pr_requester">종*우</div>
+            <div class="bg-gray-50 w-40 p-3.5 flex items-center font-bold text-gray-700 border-r border-gray-200 shrink-0">등록 일시</div>
+            <div class="p-3.5 flex items-center flex-1 border-r border-gray-200 text-gray-600" id="dtl_pr_reg_date">2026/03/12 13:25:24</div>
+            <div class="bg-gray-50 w-40 p-3.5 flex items-center font-bold text-gray-700 border-r border-gray-200 shrink-0">실행 일시</div>
+            <div class="p-3.5 flex items-center flex-1 text-gray-600" id="dtl_pr_exec_date">2026/03/12 13:26:00</div>
+        </div>
+        <div class="flex">
+            <div class="bg-gray-50 w-40 p-3.5 flex items-center font-bold text-gray-700 border-r border-gray-200 shrink-0">APP 노출 문구</div>
+            <div class="p-3.5 flex items-center w-[calc(100%-20rem-10rem)] border-r border-gray-200" id="dtl_pr_app_text">26년봄이벤트</div>
+            <div class="bg-gray-50 w-40 p-3.5 flex items-center font-bold text-gray-700 border-r border-gray-200 shrink-0">유효 기간</div>
+            <div class="p-3.5 flex items-center flex-1 text-gray-600" id="dtl_pr_validity">2026/04/30</div>
+        </div>
+    </div>
+
+    <div class="mb-2 font-bold text-[14px] text-gray-800">- 지급 대상</div>
+    <div class="flex items-center gap-3 text-[12px] mb-3">
+        <button class="text-blue-600 font-bold hover:underline flex items-center gap-1" onclick="alert('지급 대상 목록이 다운로드 됩니다.')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>다운로드
+        </button> 
+        <span class="text-gray-300">|</span> 
+        <span class="font-bold text-blue-700">전체 1</span>
+    </div>
+
+    <div class="bg-white border border-gray-200 shadow-sm w-full rounded-lg overflow-hidden flex flex-col mb-10">
+        <div class="w-full overflow-x-auto">
+            <table class="w-full text-center text-xs kona-table min-w-[1200px] border-b-0">
+                <thead class="bg-[#121F3D] text-white">
+                    <tr>
+                        <th class="py-3.5 w-12">NO</th>
+                        <th class="py-3.5">지급 기준</th>
+                        <th class="py-3.5">회원 상태</th>
+                        <th class="py-3.5">대상자명</th>
+                        <th class="py-3.5">연락처</th>
+                        <th class="py-3.5">카드 번호</th>
+                        <th class="py-3.5 text-right pr-6">지급/회수 등록 금액(원)</th>
+                        <th class="py-3.5 text-right pr-6">지급/회수 완료 금액(원)</th>
+                        <th class="py-3.5">결과</th>
+                        <th class="py-3.5">실패 사유</th>
+                    </tr>
+                </thead>
+                <tbody class="text-gray-700 bg-white" id="dtl_pr_target_body">
+                    </tbody>
+            </table>
+        </div>
+        <div class="bg-gray-50 py-4 text-center font-bold text-[13px] border-t border-gray-200 text-gray-800">
+            총 지급/회수 완료 금액 합계 <span class="text-blue-600 ml-2 text-[15px]" id="dtl_pr_total_sum">10,000 원</span>
+        </div>
+    </div>
+
+    <div class="flex mt-auto">
+        <button onclick="switchPayRetView('view-payret-list')" class="bg-white border border-gray-300 text-gray-800 px-8 py-2.5 rounded-full text-[14px] font-bold shadow-sm hover:bg-gray-50 transition">목록</button>
+    </div>
+</div>
+
+<style>
+    .animate-fade-in { animation: fadeIn 0.2s ease-in-out; }
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(5px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+</style>
+
+<script>
+    // 화면 전환 함수
+    function switchPayRetView(viewId) {
+        document.getElementById('view-payret-list').classList.add('hidden');
+        document.getElementById('view-payret-list').classList.remove('flex');
+        document.getElementById('view-payret-detail').classList.add('hidden');
+        document.getElementById('view-payret-detail').classList.remove('flex');
+        
+        const target = document.getElementById(viewId);
+        if(target) {
+            target.classList.remove('hidden'); 
+            target.classList.add('flex');
+        }
+    }
+
+    // 상세 데이터 바인딩 로직
+    function showPayRetDetail(id, type, reason, status, reqName, regDate, execDate, appText, validity) {
+        document.getElementById('dtl_pr_type').innerText = type;
+        document.getElementById('dtl_pr_reason').innerText = reason;
+        document.getElementById('dtl_pr_status').innerText = status;
+        document.getElementById('dtl_pr_requester').innerText = reqName;
+        document.getElementById('dtl_pr_reg_date').innerText = regDate;
+        document.getElementById('dtl_pr_exec_date').innerText = execDate;
+        document.getElementById('dtl_pr_app_text').innerText = appText;
+        document.getElementById('dtl_pr_validity').innerText = validity;
+
+        const isRetrieval = type.includes('회수');
+        if(isRetrieval) {
+            document.getElementById('dtl_pr_type').className = "p-3.5 flex items-center w-1/2 font-bold text-red-500";
+            document.getElementById('dtl_pr_prod').innerText = "더한옥 VIP 기프트카드";
+            
+            document.getElementById('dtl_pr_target_body').innerHTML = `
+                <tr class="hover:bg-gray-50 border-b border-gray-100">
+                    <td class="py-4">1</td>
+                    <td>개별</td>
+                    <td>정상</td>
+                    <td class="font-bold">홍*길</td>
+                    <td class="font-mono text-gray-500">010-9999-****</td>
+                    <td class="font-mono font-bold">9411-55**-****-7777</td>
+                    <td class="text-right pr-6 font-bold text-red-500">- 50,000</td>
+                    <td class="text-right pr-6 font-bold text-red-500">- 50,000</td>
+                    <td class="font-bold text-gray-800">성공</td>
+                    <td class="text-gray-400">-</td>
+                </tr>
+            `;
+            document.getElementById('dtl_pr_total_sum').innerText = "- 50,000 원";
+            document.getElementById('dtl_pr_total_sum').className = "text-red-500 ml-2 text-[15px]";
+
+        } else {
+            document.getElementById('dtl_pr_type').className = "p-3.5 flex items-center w-1/2 font-bold text-blue-700";
+            document.getElementById('dtl_pr_prod').innerText = "더한옥헤리티지 기프트카드";
+            
+            document.getElementById('dtl_pr_target_body').innerHTML = `
+                <tr class="hover:bg-gray-50 border-b border-gray-100">
+                    <td class="py-4">1</td>
+                    <td>일괄</td>
+                    <td>정상</td>
+                    <td class="font-bold">무*****우</td>
+                    <td class="font-mono text-gray-500">010-1234-****</td>
+                    <td class="font-mono font-bold">9411-33**-****-6285</td>
+                    <td class="text-right pr-6 font-bold text-blue-700">50,000</td>
+                    <td class="text-right pr-6 font-bold text-blue-700">50,000</td>
+                    <td class="font-bold text-gray-800">성공</td>
+                    <td class="text-gray-400">-</td>
+                </tr>
+            `;
+            document.getElementById('dtl_pr_total_sum').innerText = "50,000 원"; // 1건 예시 표기
+            document.getElementById('dtl_pr_total_sum').className = "text-blue-600 ml-2 text-[15px]";
+        }
+
+        switchPayRetView('view-payret-detail');
+    }
+</script>
