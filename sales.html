@@ -33,42 +33,19 @@
             <table class="w-full text-center text-xs kona-table min-w-[1400px]">
                 <thead class="bg-[#121F3D] text-white">
                     <tr>
-                        <th class="py-3">주문번호</th>
-                        <th class="py-3">신청일시</th>
-                        <th class="py-3">상품명</th>
-                        <th class="py-3">수량</th>
-                        <th class="py-3 text-right pr-6">총 결제금액</th>
-                        <th class="py-3">상태</th>
-                        <th class="py-3">구분</th>
-                        <th class="py-3">신청자명</th>
-                        <th class="py-3">연락처</th>
-                        <th class="py-3">결제일시</th>
+                        <th class="py-3">주문번호</th><th class="py-3">신청일시</th><th class="py-3">상품명</th>
+                        <th class="py-3">수량</th><th class="py-3 text-right pr-6">총 결제금액</th>
+                        <th class="py-3">상태</th><th class="py-3">구분</th>
+                        <th class="py-3">신청자명</th><th class="py-3">연락처</th><th class="py-3">결제일시</th>
                     </tr>
                 </thead>
                 <tbody class="text-gray-700 bg-white">
                     <tr class="hover:bg-blue-50 cursor-pointer border-b border-gray-100" onclick="showSalesDetail('REQ-260311-01', '이신청', '구매 신청', '200,000', '2026/03/11', 0)">
                         <td class="font-mono text-blue-600 font-bold underline py-4">REQ-260311-01</td>
-                        <td>2026/03/11</td>
-                        <td class="font-bold text-gray-800">더한옥헤리티지하우스 상품권</td>
-                        <td>1</td>
+                        <td>2026/03/11</td><td class="font-bold text-gray-800">더한옥헤리티지하우스 상품권</td><td>1</td>
                         <td class="text-right pr-6 font-bold">200,000</td>
                         <td><span class="bg-pink-50 text-pink-500 border border-pink-100 px-2 py-0.5 rounded text-[10px] font-bold">구매 신청</span></td>
-                        <td>개인</td>
-                        <td class="font-bold">이신청</td>
-                        <td>010-1111-2222</td>
-                        <td class="text-gray-400">-</td>
-                    </tr>
-                    <tr class="hover:bg-blue-50 cursor-pointer border-b border-gray-100 bg-gray-50" onclick="showSalesDetail('REQ-260310-02', '김법인', '입금 요청', '1,200,000', '2026/03/10', 1)">
-                        <td class="font-mono text-blue-600 font-bold underline py-4">REQ-260310-02</td>
-                        <td>2026/03/10</td>
-                        <td class="font-bold text-gray-800">더한옥 VIP 상품권 <span class="text-blue-600 font-bold ml-1">외 1건</span></td>
-                        <td>2</td>
-                        <td class="text-right pr-6 font-bold">1,200,000</td>
-                        <td><span class="bg-amber-50 text-amber-600 border border-amber-100 px-2 py-0.5 rounded text-[10px] font-bold">입금 요청</span></td>
-                        <td>법인</td>
-                        <td class="font-bold">김법인</td>
-                        <td>010-3333-4444</td>
-                        <td class="text-gray-400">-</td>
+                        <td>개인</td><td class="font-bold">이신청</td><td>010-1111-2222</td><td class="text-gray-400">-</td>
                     </tr>
                 </tbody>
             </table>
@@ -84,47 +61,33 @@
         </div>
         <div class="flex gap-2">
             <button class="bg-[#121F3D] text-white px-6 py-2 rounded-full text-[13px] font-bold shadow-md hover:bg-black transition">등록 완료 (포인트 지급)</button>
-            <button class="bg-white border border-gray-300 text-gray-800 px-6 py-2 rounded-full text-[13px] font-bold shadow-sm hover:bg-gray-50 transition" onclick="switchSalesView('view-sales-list')">목록</button>
+            <button class="bg-white border border-gray-300 text-gray-800 px-6 py-2 rounded-full text-[13px] font-bold shadow-sm" onclick="switchSalesView('view-sales-list')">목록</button>
         </div>
     </div>
 
-    <div class="grid grid-cols-2 gap-8 mb-8">
-        <div class="bg-white border border-gray-200 rounded shadow-sm overflow-hidden text-[13px]">
-            <div class="flex border-b border-gray-100 min-h-[44px]">
-                <div class="bg-gray-50 w-32 p-3 font-bold text-gray-600 border-r border-gray-200 flex items-center">주문번호</div>
-                <div class="p-3 flex-1 font-mono text-blue-600 font-bold underline" id="dtl_order_id"></div>
-            </div>
-            <div class="flex min-h-[44px]">
-                <div class="bg-gray-50 w-32 p-3 font-bold text-gray-600 border-r border-gray-200 flex items-center">진행 상태</div>
-                <div class="p-3 flex-1" id="dtl_status_badge"></div>
-            </div>
+    <div class="grid grid-cols-2 gap-8 mb-8 text-[13px]">
+        <div class="bg-white border border-gray-200 rounded shadow-sm overflow-hidden">
+            <div class="flex border-b"><div class="bg-gray-50 w-32 p-3 font-bold border-r">주문번호</div><div class="p-3 font-mono text-blue-600 font-bold" id="dtl_order_id"></div></div>
+            <div class="flex"><div class="bg-gray-50 w-32 p-3 font-bold border-r">진행 상태</div><div class="p-3" id="dtl_status_badge"></div></div>
         </div>
-        <div class="bg-white border border-gray-200 rounded shadow-sm overflow-hidden text-[13px]">
-            <div class="flex border-b border-gray-100 min-h-[44px]">
-                <div class="bg-gray-50 w-32 p-3 font-bold text-gray-600 border-r border-gray-200 flex items-center">구매자명</div>
-                <div class="p-3 flex-1 font-bold text-gray-800" id="dtl_user_name"></div>
-            </div>
-            <div class="flex min-h-[44px]">
-                <div class="bg-gray-50 w-32 p-3 font-bold text-gray-600 border-r border-gray-200 flex items-center">총 결제 금액</div>
-                <div class="p-3 flex-1 font-bold text-blue-600 text-xl" id="dtl_total_price"></div>
-            </div>
+        <div class="bg-white border border-gray-200 rounded shadow-sm overflow-hidden">
+            <div class="flex border-b"><div class="bg-gray-50 w-32 p-3 font-bold border-r">신청자명</div><div class="p-3 font-bold" id="dtl_user_name"></div></div>
+            <div class="flex"><div class="bg-gray-50 w-32 p-3 font-bold border-r">총 결제 금액</div><div class="p-3 font-bold text-blue-600" id="dtl_total_price"></div></div>
         </div>
     </div>
 
-    <div class="flex-1 flex flex-col">
-        <h3 class="text-[14px] font-bold text-gray-700 mb-2">- 지급 대상 카드 매핑</h3>
-        <div class="bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden">
-            <table class="w-full text-center text-xs">
-                <thead class="bg-[#121F3D] text-white">
-                    <tr><th class="py-3.5 w-16">NO</th><th class="text-left pl-10">상품명 (권종)</th><th class="py-3.5 w-64">카드번호 매핑</th><th class="py-3.5 w-40 pr-10 text-right">금액(원)</th></tr>
-                </thead>
-                <tbody class="text-gray-700" id="dtl_mapping_body"></tbody>
-            </table>
-        </div>
+    <div class="flex-1 bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden">
+        <table class="w-full text-center text-xs">
+            <thead class="bg-[#121F3D] text-white">
+                <tr><th class="py-3 w-16">NO</th><th class="text-left pl-10">상품명</th><th class="w-64">카드번호 매핑</th><th class="text-right pr-10">금액</th></tr>
+            </thead>
+            <tbody id="dtl_mapping_body"></tbody>
+        </table>
     </div>
 </div>
 
 <script>
+    // [수정] alert가 섞여있던 모든 로직 제거
     function switchSalesView(viewId) {
         document.getElementById('view-sales-list').classList.add('hidden');
         document.getElementById('view-sales-list').classList.remove('flex');
@@ -135,21 +98,19 @@
     }
 
     function showSalesDetail(id, name, status, price, date, extraCount) {
-        document.getElementById('dtl_title').innerText = status.includes('신청') ? '구매 신청 상세 내역' : '판매 상세 내역';
         document.getElementById('dtl_order_id').innerText = id;
         document.getElementById('dtl_user_name').innerText = name;
         document.getElementById('dtl_total_price').innerText = price + " 원";
         
         const badge = document.getElementById('dtl_status_badge');
         badge.innerText = status;
-        badge.className = status.includes('신청') ? "text-pink-500 font-bold" : "text-amber-500 font-bold";
+        badge.className = "p-3 " + (status.includes('신청') ? "text-pink-500 font-bold" : "text-amber-500 font-bold");
 
-        const mappingBody = document.getElementById('dtl_mapping_body');
         let rows = '';
         for(let i=1; i<=(extraCount + 1); i++) {
-            rows += `<tr class="border-b"><td class="py-5 text-gray-400">${i}</td><td class="text-left pl-10 font-bold">더한옥 상품권</td><td><button class="border border-blue-400 text-blue-600 px-4 py-1 rounded-full text-[11px] font-bold bg-blue-50">재고 카드 매핑하기</button></td><td class="font-bold text-gray-900 pr-10 text-right">${price}</td></tr>`;
+            rows += `<tr class="border-b"><td class="py-5 text-gray-400">${i}</td><td class="text-left pl-10 font-bold">더한옥 상품권</td><td><button class="border border-blue-400 text-blue-600 px-4 py-1.5 rounded-full text-[11px] font-bold bg-blue-50">재고 카드 매핑하기</button></td><td class="font-bold pr-10 text-right">${price}</td></tr>`;
         }
-        mappingBody.innerHTML = rows;
+        document.getElementById('dtl_mapping_body').innerHTML = rows;
         switchSalesView('view-sales-detail');
     }
 </script>
