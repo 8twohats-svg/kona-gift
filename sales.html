@@ -11,23 +11,6 @@
         </div>
     </div>
     
-    <div class="bg-white border border-gray-200 p-5 mb-6 shadow-sm relative text-[13px] flex flex-col gap-4 rounded-lg">
-        <div class="grid grid-cols-12 gap-4 items-center">
-            <div class="col-span-1 font-bold text-gray-700">검색 분류</div>
-            <div class="col-span-4 flex gap-2">
-                <select class="input-kona w-32 bg-gray-50 font-medium"><option>신청자명</option><option>주문번호</option></select>
-                <input type="text" class="input-kona flex-1" placeholder="검색어 입력">
-            </div>
-            <div class="col-span-1 font-bold text-gray-700 text-right pr-4">상태</div>
-            <div class="col-span-4">
-                <select class="input-kona w-full font-medium"><option>전체</option><option>구매 신청</option><option>입금 요청</option><option>결제 완료</option></select>
-            </div>
-            <div class="col-span-2 flex justify-end">
-                <button class="bg-[#1636d6] text-white px-8 py-1.5 rounded font-bold shadow-sm hover:bg-blue-800 transition">조회</button>
-            </div>
-        </div>
-    </div>
-
     <div class="bg-white border border-gray-200 shadow-sm w-full flex-1 relative rounded-lg overflow-hidden">
         <div class="custom-scrollbar w-full h-full overflow-y-auto">
             <table class="w-full text-center text-xs kona-table min-w-[1400px]">
@@ -57,7 +40,7 @@
     <div class="flex items-center justify-between mb-6">
         <div class="flex items-center gap-3">
             <button onclick="switchSalesView('view-sales-list')" class="text-gray-400 hover:text-black text-2xl transition">←</button>
-            <h1 class="text-xl font-bold text-gray-900" id="dtl_title">상세 내역</h1>
+            <h1 class="text-xl font-bold text-gray-900">상세 내역</h1>
         </div>
         <div class="flex gap-2">
             <button class="bg-[#121F3D] text-white px-6 py-2 rounded-full text-[13px] font-bold shadow-md hover:bg-black transition">등록 완료 (포인트 지급)</button>
@@ -87,28 +70,39 @@
 </div>
 
 <script>
-    // [수정] alert가 섞여있던 모든 로직 제거
+    // [중요] 모든 alert를 제거하고 순수 화면 전환만 남김
     function switchSalesView(viewId) {
-        document.getElementById('view-sales-list').classList.add('hidden');
-        document.getElementById('view-sales-list').classList.remove('flex');
-        document.getElementById('view-sales-detail').classList.add('hidden');
-        document.getElementById('view-sales-detail').classList.remove('flex');
+        const listView = document.getElementById('view-sales-list');
+        const detailView = document.getElementById('view-sales-detail');
+        
+        listView.classList.add('hidden');
+        listView.classList.remove('flex');
+        detailView.classList.add('hidden');
+        detailView.classList.remove('flex');
+
         const target = document.getElementById(viewId);
-        if(target) { target.classList.remove('hidden'); target.classList.add('flex'); }
+        if(target) {
+            target.classList.remove('hidden');
+            target.classList.add('flex');
+        }
     }
 
     function showSalesDetail(id, name, status, price, date, extraCount) {
         document.getElementById('dtl_order_id').innerText = id;
         document.getElementById('dtl_user_name').innerText = name;
         document.getElementById('dtl_total_price').innerText = price + " 원";
-        
-        const badge = document.getElementById('dtl_status_badge');
-        badge.innerText = status;
-        badge.className = "p-3 " + (status.includes('신청') ? "text-pink-500 font-bold" : "text-amber-500 font-bold");
+        document.getElementById('dtl_status_badge').innerText = status;
 
+        // 테이블 행 생성 로직
         let rows = '';
         for(let i=1; i<=(extraCount + 1); i++) {
-            rows += `<tr class="border-b"><td class="py-5 text-gray-400">${i}</td><td class="text-left pl-10 font-bold">더한옥 상품권</td><td><button class="border border-blue-400 text-blue-600 px-4 py-1.5 rounded-full text-[11px] font-bold bg-blue-50">재고 카드 매핑하기</button></td><td class="font-bold pr-10 text-right">${price}</td></tr>`;
+            rows += `
+                <tr class="border-b">
+                    <td class="py-5 text-gray-400">${i}</td>
+                    <td class="text-left pl-10 font-bold">더한옥 상품권</td>
+                    <td><button class="border border-blue-400 text-blue-600 px-4 py-1.5 rounded-full text-[11px] font-bold bg-blue-50">재고 매핑</button></td>
+                    <td class="font-bold pr-10 text-right">${price}</td>
+                </tr>`;
         }
         document.getElementById('dtl_mapping_body').innerHTML = rows;
         switchSalesView('view-sales-detail');
