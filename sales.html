@@ -18,13 +18,17 @@
             </div>
             <div class="col-span-1 font-bold text-gray-700 text-right pr-4">진행 상태</div>
             <div class="col-span-3">
-                <select class="input-kona w-full"><option>전체</option><option>구매신청</option><option>결제완료</option><option>지급완료</option></select>
+                <select class="input-kona w-full"><option>전체</option><option>구매신청(입금대기)</option><option>결제완료(매핑대기)</option><option>지급완료</option></select>
             </div>
         </div>
         <div class="flex justify-end gap-2 pt-3 border-t border-gray-100">
             <button class="btn-outline px-6 font-bold">초기화</button>
             <button class="bg-[#1636d6] text-white px-8 py-1.5 rounded-full font-bold shadow-sm hover:bg-blue-800 transition">조회</button>
         </div>
+    </div>
+
+    <div class="flex justify-between items-end mb-2">
+        <span class="text-xs font-bold text-gray-800">전체 <span class="text-blue-600">4</span>건</span>
     </div>
 
     <div class="bg-white border border-gray-200 shadow-sm w-full flex-1 relative rounded-lg overflow-hidden">
@@ -42,32 +46,32 @@
                     </tr>
                 </thead>
                 <tbody class="text-gray-700 bg-white">
-                    <tr class="hover:bg-blue-50 cursor-pointer border-b" onclick="showSalesDetail('RE-260313-01', '김충전', '결제완료(지급대기)', '50,000', '2026/03/13 09:30:00', 0, 'recharge')">
-                        <td>1</td>
-                        <td><span class="text-blue-600 font-bold border border-blue-200 bg-blue-50 px-2 py-0.5 rounded text-[10px]">기존 카드 충전</span></td>
-                        <td class="font-mono text-blue-600 font-bold underline">RE-260313-01</td>
-                        <td class="font-bold">김충전</td>
-                        <td class="text-left pl-6">더한옥헤리티지하우스 50,000원 충전 (기보유카드: 9440-****-1111)</td>
-                        <td class="text-right pr-6 font-bold">50,000</td>
-                        <td><span class="bg-blue-50 text-blue-600 border border-blue-200 px-2 py-0.5 rounded text-[10px] font-bold">결제완료</span></td>
-                    </tr>
-                    <tr class="hover:bg-blue-50 cursor-pointer border-b" onclick="showSalesDetail('NEW-260312-44', '이발급', '결제완료(매핑대기)', '200,000', '2026/03/12 14:20:00', 0, 'new_issue')">
-                        <td>2</td>
-                        <td><span class="text-green-600 font-bold border border-green-200 bg-green-50 px-2 py-0.5 rounded text-[10px]">기존 고객 신규 발급</span></td>
-                        <td class="font-mono text-blue-600 font-bold underline">NEW-260312-44</td>
-                        <td class="font-bold">이발급</td>
-                        <td class="text-left pl-6">더한옥 VIP 상품권 200,000원 신규 발급</td>
-                        <td class="text-right pr-6 font-bold">200,000</td>
-                        <td><span class="bg-red-50 text-red-500 border border-red-200 px-2 py-0.5 rounded text-[10px] font-bold">매핑대기</span></td>
-                    </tr>
                     <tr class="hover:bg-blue-50 cursor-pointer border-b" onclick="showSalesDetail('2026031201', '정입금', '구매신청(입금대기)', '1,000,000', '2026/03/12 10:00:00', 4, 'normal')">
-                        <td>3</td>
+                        <td>1</td>
                         <td>신규 판매</td>
                         <td class="font-mono text-blue-600 font-bold underline">2026031201</td>
                         <td class="font-bold">정입금</td>
-                        <td class="text-left pl-6">더한옥 상품권 1,000,000원 <span class="text-blue-600 font-bold ml-1">외 4건</span></td>
+                        <td class="text-left pl-6">더한옥헤리티지하우스 상품권 1,000,000원 <span class="text-blue-600 font-bold ml-1">외 4건</span></td>
                         <td class="text-right pr-6 font-bold">5,000,000</td>
                         <td><span class="bg-pink-50 text-pink-500 border border-pink-100 px-2 py-0.5 rounded text-[10px] font-bold">구매신청 (입금대기)</span></td>
+                    </tr>
+                    <tr class="hover:bg-blue-50 cursor-pointer border-b" onclick="showSalesDetail('RE-260313-01', '김충전', '결제완료', '50,000', '2026/03/13 09:30:00', 0, 'recharge')">
+                        <td>2</td>
+                        <td><span class="text-blue-600 font-bold border border-blue-200 bg-blue-50 px-2 py-0.5 rounded text-[10px]">기존 카드 충전</span></td>
+                        <td class="font-mono text-blue-600 font-bold underline">RE-260313-01</td>
+                        <td class="font-bold">김충전</td>
+                        <td class="text-left pl-6">더한옥 50,000원 충전 (보유카드: 9440-****-1111)</td>
+                        <td class="text-right pr-6 font-bold">50,000</td>
+                        <td><span class="bg-blue-50 text-blue-600 border border-blue-200 px-2 py-0.5 rounded text-[10px] font-bold">결제완료</span></td>
+                    </tr>
+                    <tr class="hover:bg-blue-50 cursor-pointer border-b bg-red-50/10" onclick="showSalesDetail('202602241', '홍길동', '결제완료(매핑대기)', '200,000', '2026/02/24 16:05:14', 0, 'normal')">
+                        <td>3</td>
+                        <td>신규 판매</td>
+                        <td class="font-mono text-blue-600 font-bold underline">202602241</td>
+                        <td class="font-bold">홍길동</td>
+                        <td class="text-left pl-6">더한옥헤리티지하우스 상품권 200,000원</td>
+                        <td class="text-right pr-6 font-bold">200,000</td>
+                        <td><span class="bg-red-50 text-red-500 border border-red-200 px-2 py-0.5 rounded text-[10px] font-bold">결제완료 (매핑대기)</span></td>
                     </tr>
                 </tbody>
             </table>
@@ -88,47 +92,41 @@
     </div>
 
     <div class="grid grid-cols-2 gap-8 mb-8">
-        <div>
-            <h3 class="text-[14px] font-bold text-gray-700 mb-2">- 주문 정보</h3>
-            <div class="bg-white border border-gray-200 rounded shadow-sm overflow-hidden text-[13px]">
-                <div class="flex border-b border-gray-100 min-h-[44px]">
-                    <div class="bg-gray-50 w-32 p-3 font-bold text-gray-600 border-r border-gray-200 flex items-center">주문번호</div>
-                    <div class="p-3 flex-1 font-mono text-blue-600 font-bold underline" id="dtl_order_id"></div>
-                </div>
-                <div class="flex border-b border-gray-100 min-h-[44px]">
-                    <div class="bg-gray-50 w-32 p-3 font-bold text-gray-600 border-r border-gray-200 flex items-center">판매 유형</div>
-                    <div class="p-3 flex-1 font-bold" id="dtl_sale_type">-</div>
-                </div>
-                <div class="flex min-h-[44px]">
-                    <div class="bg-gray-50 w-32 p-3 font-bold text-gray-600 border-r border-gray-200 flex items-center">진행 상태</div>
-                    <div class="p-3 flex-1" id="dtl_status_badge"></div>
-                </div>
+        <div class="bg-white border border-gray-200 rounded shadow-sm overflow-hidden text-[13px]">
+            <div class="flex border-b border-gray-100 min-h-[44px]">
+                <div class="bg-gray-50 w-32 p-3 font-bold text-gray-600 border-r border-gray-200 flex items-center">주문번호</div>
+                <div class="p-3 flex-1 font-mono text-blue-600 font-bold underline" id="dtl_order_id"></div>
+            </div>
+            <div class="flex border-b border-gray-100 min-h-[44px]">
+                <div class="bg-gray-50 w-32 p-3 font-bold text-gray-600 border-r border-gray-200 flex items-center">판매 유형</div>
+                <div class="p-3 flex-1 font-bold" id="dtl_sale_type"></div>
+            </div>
+            <div class="flex min-h-[44px]">
+                <div class="bg-gray-50 w-32 p-3 font-bold text-gray-600 border-r border-gray-200 flex items-center">진행 상태</div>
+                <div class="p-3 flex-1" id="dtl_status_badge"></div>
             </div>
         </div>
-        <div>
-            <h3 class="text-[14px] font-bold text-gray-700 mb-2">- 신청인 정보</h3>
-            <div class="bg-white border border-gray-200 rounded shadow-sm overflow-hidden text-[13px]">
-                <div class="flex border-b border-gray-100 min-h-[44px]">
-                    <div class="bg-gray-50 w-32 p-3 font-bold text-gray-600 border-r border-gray-200 flex items-center">신청인명</div>
-                    <div class="p-3 flex-1 font-bold text-gray-800" id="dtl_user_name"></div>
-                </div>
-                <div class="flex min-h-[44px]">
-                    <div class="bg-gray-50 w-32 p-3 font-bold text-gray-600 border-r border-gray-200 flex items-center">연락처</div>
-                    <div class="p-3 flex-1 text-gray-700">010-****-****</div>
-                </div>
+        <div class="bg-white border border-gray-200 rounded shadow-sm overflow-hidden text-[13px]">
+            <div class="flex border-b border-gray-100 min-h-[44px]">
+                <div class="bg-gray-50 w-32 p-3 font-bold text-gray-600 border-r border-gray-200 flex items-center">신청인명</div>
+                <div class="p-3 flex-1 font-bold text-gray-800" id="dtl_user_name"></div>
+            </div>
+            <div class="flex min-h-[44px]">
+                <div class="bg-gray-50 w-32 p-3 font-bold text-gray-600 border-r border-gray-200 flex items-center">연락처</div>
+                <div class="p-3 flex-1 text-gray-700">010-****-**** | user@example.com</div>
             </div>
         </div>
     </div>
 
     <div class="flex-1 flex flex-col">
-        <h3 class="text-[14px] font-bold text-gray-700 mb-2" id="mapping_title">- 지급 대상 정보</h3>
+        <h3 class="text-[14px] font-bold text-gray-700 mb-2">- 지급 대상 정보</h3>
         <div class="bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden flex flex-col">
             <table class="w-full text-center text-xs">
                 <thead class="bg-[#121F3D] text-white">
                     <tr>
                         <th class="py-3.5 w-16">NO</th>
                         <th class="py-3.5 text-left pl-10">상품명 (권종)</th>
-                        <th class="py-3.5 w-64" id="table_col_action">카드번호 매핑</th>
+                        <th class="py-3.5 w-64" id="col_action_title">카드번호 매핑</th>
                         <th class="py-3.5 w-40 pr-10 text-right">금액(원)</th>
                     </tr>
                 </thead>
@@ -140,8 +138,10 @@
 
 <script>
     function switchSalesView(viewId) {
-        document.getElementById('view-sales-list').classList.add('hidden');
-        document.getElementById('view-sales-detail').classList.add('hidden');
+        const list = document.getElementById('view-sales-list');
+        const detail = document.getElementById('view-sales-detail');
+        list.classList.add('hidden'); list.classList.remove('flex');
+        detail.classList.add('hidden'); detail.classList.remove('flex');
         const target = document.getElementById(viewId);
         if(target) { target.classList.remove('hidden'); target.classList.add('flex'); }
     }
@@ -149,44 +149,38 @@
     function showSalesDetail(id, name, status, price, date, extraCount, typeCode) {
         document.getElementById('dtl_order_id').innerText = id;
         document.getElementById('dtl_user_name').innerText = name;
+        document.getElementById('dtl_reg_date').innerText = date;
         
-        const typeLabels = { recharge: '기존 카드 충전', new_issue: '기존 고객 신규 발급', normal: '신규 판매' };
-        document.getElementById('dtl_sale_type').innerText = typeLabels[typeCode];
+        const typeNames = { recharge: '기존 카드 충전', new_issue: '기존 고객 신규 발급', normal: '신규 판매' };
+        document.getElementById('dtl_sale_type').innerText = typeNames[typeCode] || '일반 판매';
         
         const badge = document.getElementById('dtl_status_badge');
         badge.innerText = status;
         badge.className = status.includes('신청') ? 
             "bg-pink-50 text-pink-500 border border-pink-100 px-2 py-0.5 rounded text-[11px] font-bold" : 
-            "bg-blue-50 text-blue-600 border border-blue-200 px-2 py-0.5 rounded text-[11px] font-bold";
+            "bg-red-50 text-red-500 border border-red-200 px-2 py-0.5 rounded text-[10px] font-bold";
 
         const mappingBody = document.getElementById('dtl_mapping_body');
-        const actionCol = document.getElementById('table_col_action');
+        const colTitle = document.getElementById('col_action_title');
+        const isPending = status.includes('신청');
+        
         let rows = '';
+        const totalItems = extraCount + 1;
 
         if(typeCode === 'recharge') {
-            // 충전 시나리오: 매핑 필요 없음, 충전 대상 카드번호 노출
-            actionCol.innerText = "충전 대상 카드";
-            rows = `
-                <tr class="border-b border-gray-100">
-                    <td class="py-5 text-gray-400">1</td>
-                    <td class="text-left pl-10 font-bold text-gray-800">더한옥헤리티지하우스 충전</td>
-                    <td class="font-mono font-bold text-blue-700">9440-****-****-1111</td>
-                    <td class="font-bold text-gray-900 pr-10 text-right">${price}</td>
-                </tr>`;
+            colTitle.innerText = "충전 대상 카드";
+            rows = `<tr class="border-b border-gray-100"><td class="py-5 text-gray-400">1</td><td class="text-left pl-10 font-bold">더한옥 상품권 충전</td><td class="font-mono font-bold text-blue-700">9440-****-****-1111</td><td class="text-right pr-10 font-bold">${price}</td></tr>`;
         } else {
-            // 신규 발급/판매: 매핑 필요
-            actionCol.innerText = "카드번호 매핑";
-            const isPending = status.includes('신청');
-            rows = `
+            colTitle.innerText = "카드번호 매핑";
+            for(let i=1; i<=totalItems; i++) {
+                rows += `
                 <tr class="border-b border-gray-100">
-                    <td class="py-5 text-gray-400">1</td>
-                    <td class="text-left pl-10 font-bold text-gray-800">더한옥 상품권</td>
-                    <td>
-                        ${isPending ? '<span class="text-gray-400 italic">결제 대기 중</span>' : 
-                        '<button class="border border-blue-400 text-blue-600 px-6 py-1.5 rounded-full text-[11px] font-bold bg-blue-50">재고 카드 매핑하기</button>'}
-                    </td>
-                    <td class="font-bold text-gray-900 pr-10 text-right">${price}</td>
+                    <td class="py-5 text-gray-400">${i}</td>
+                    <td class="text-left pl-10 font-bold">더한옥헤리티지하우스 상품권 (${price}원)</td>
+                    <td>${isPending ? '<span class="text-gray-400 italic">입금 대기 중 (매핑 불가)</span>' : '<button class="border border-blue-400 text-blue-600 px-4 py-1 rounded-full text-[11px] font-bold bg-blue-50 hover:bg-blue-100">재고 카드 매핑</button>'}</td>
+                    <td class="text-right pr-10 font-bold">${price}</td>
                 </tr>`;
+            }
         }
         mappingBody.innerHTML = rows;
         switchSalesView('view-sales-detail');
