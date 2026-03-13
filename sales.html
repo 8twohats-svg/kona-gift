@@ -110,7 +110,7 @@
                 </div>
                 <div class="flex min-h-[44px]">
                     <div class="bg-gray-50 w-32 p-3 font-bold text-gray-600 border-r border-gray-200 flex items-center">휴대폰/이메일</div>
-                    <div class="p-3 flex-1 text-gray-700" id="dtl_user_contact"></div>
+                    <div class="p-3 flex-1 text-gray-700">010-****-**** <span class="mx-2 text-gray-300">|</span> user@konai.com</div>
                 </div>
             </div>
         </div>
@@ -133,8 +133,8 @@
     </div>
 
     <div class="flex-1 flex flex-col">
-        <h3 class="text-[14px] font-bold text-gray-700 mb-2">지급 대상 카드 매핑</h3>
-        <div class="bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden">
+        <h3 class="text-[14px] font-bold text-gray-700 mb-2">지급 대상 카드 매핑 <span class="text-xs font-normal text-gray-400 ml-2">※ 모든 카드를 매핑 후 등록 완료를 눌러주세요.</span></h3>
+        <div class="bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden flex flex-col">
             <table class="w-full text-center text-xs">
                 <thead class="bg-[#121F3D] text-white">
                     <tr>
@@ -151,27 +151,28 @@
 </div>
 
 <div id="mappingPopup" class="fixed inset-0 bg-black bg-opacity-50 z-[100] flex items-center justify-center hidden">
-    <div class="bg-white rounded-lg shadow-xl w-[500px] overflow-hidden animate-fade-in">
+    <div class="bg-white rounded shadow-xl w-[480px] overflow-hidden">
         <div class="bg-[#121F3D] p-4 flex justify-between items-center">
-            <h2 class="text-white font-bold">재고 카드 매핑</h2>
-            <button onclick="closeMappingPopup()" class="text-white text-2xl">&times;</button>
+            <h2 class="text-white font-bold text-sm">재고 카드 매핑</h2>
+            <button onclick="closeMappingPopup()" class="text-white text-2xl leading-none">&times;</button>
         </div>
-        <div class="p-6">
-            <div class="mb-4">
-                <input type="text" class="input-kona" placeholder="카드번호 뒤 4자리 검색...">
+        <div class="p-6 bg-white">
+            <div class="mb-4 flex gap-2">
+                <input type="text" id="popup_search" class="input-kona" placeholder="카드번호 뒤 4자리 검색">
+                <button class="bg-[#121F3D] text-white px-4 rounded text-xs">조회</button>
             </div>
-            <div class="max-h-60 overflow-y-auto border border-gray-200 rounded">
-                <table class="w-full text-xs text-center">
+            <div class="max-h-64 overflow-y-auto border border-gray-200 rounded">
+                <table class="w-full text-xs text-center border-collapse">
                     <thead class="bg-gray-50 sticky top-0">
                         <tr><th class="p-2 border-b">선택</th><th class="p-2 border-b">카드번호</th><th class="p-2 border-b">상태</th></tr>
                     </thead>
-                    <tbody>
-                        <tr class="hover:bg-blue-50 cursor-pointer" onclick="selectCard('9440-1234-5678-0001')">
+                    <tbody id="popup_card_list">
+                        <tr class="hover:bg-blue-50 cursor-pointer" onclick="selectCardRow(this, '9440-1234-5678-0001')">
                             <td class="p-2 border-b"><input type="radio" name="card_sel"></td>
                             <td class="p-2 border-b font-mono">9440-1234-5678-0001</td>
                             <td class="p-2 border-b text-green-600 font-bold">재고보유</td>
                         </tr>
-                        <tr class="hover:bg-blue-50 cursor-pointer" onclick="selectCard('9440-1234-5678-0002')">
+                        <tr class="hover:bg-blue-50 cursor-pointer" onclick="selectCardRow(this, '9440-1234-5678-0002')">
                             <td class="p-2 border-b"><input type="radio" name="card_sel"></td>
                             <td class="p-2 border-b font-mono">9440-1234-5678-0002</td>
                             <td class="p-2 border-b text-green-600 font-bold">재고보유</td>
@@ -180,20 +181,26 @@
                 </table>
             </div>
             <div class="mt-6 flex gap-2">
-                <button onclick="closeMappingPopup()" class="flex-1 bg-gray-100 py-2 rounded font-bold">취소</button>
-                <button onclick="confirmMapping()" class="flex-1 bg-blue-600 text-white py-2 rounded font-bold">매핑 확정</button>
+                <button onclick="closeMappingPopup()" class="flex-1 border border-gray-300 py-2 rounded font-bold text-xs">취소</button>
+                <button onclick="confirmMapping()" class="flex-1 bg-blue-600 text-white py-2 rounded font-bold text-xs">매핑 확정</button>
             </div>
         </div>
     </div>
 </div>
 
 <script>
-    let currentTargetRow = null;
+    let activeRowIndex = null;
+    let selectedCardNumber = null;
 
     function switchSalesView(viewId) {
         document.getElementById('view-sales-list').classList.add('hidden');
         document.getElementById('view-sales-detail').classList.add('hidden');
-        document.getElementById(viewId).classList.remove('hidden'); target.classList.add('flex');
+        
+        const target = document.getElementById(viewId);
+        if(target) {
+            target.classList.remove('hidden');
+            target.classList.add('flex');
+        }
     }
 
     function showSalesDetail(id, name, status, price, date, extraCount) {
@@ -201,11 +208,13 @@
         document.getElementById('dtl_order_id').innerText = id;
         document.getElementById('dtl_user_name').innerText = name;
         document.getElementById('dtl_reg_date').innerText = date;
-        document.getElementById('dtl_total_price').innerText = (parseInt(price.replace(/,/g, '')) * (extraCount > 0 ? (extraCount + 1) : 1)).toLocaleString() + " 원";
-        document.getElementById('dtl_user_contact').innerText = '010-****-**** | user@konai.com';
+        
+        const numericPrice = parseInt(price.replace(/,/g, ''));
+        const totalAmount = numericPrice * (extraCount > 0 ? (extraCount + 1) : 1);
+        document.getElementById('dtl_total_price').innerText = totalAmount.toLocaleString() + " 원";
         
         const badge = document.getElementById('dtl_status_badge');
-        const isPending = status.includes('대기') && status.includes('구매신청');
+        const isPending = status.includes('대기') && status.includes('신청');
         
         badge.className = isPending ? 
             "bg-pink-50 text-pink-500 border border-pink-100 px-2 py-0.5 rounded text-[11px] font-bold" : 
@@ -222,7 +231,7 @@
                     <td class="text-left pl-10 font-bold text-gray-800">더한옥헤리티지하우스 상품권 (${price}원)</td>
                     <td id="mapping_cell_${i}">
                         ${isPending ? 
-                          '<span class="text-gray-400 italic">결제 대기 중 (매핑 불가)</span>' : 
+                          '<span class="text-gray-400 italic">입금 대기 중 (매핑 불가)</span>' : 
                           `<button onclick="openMappingPopup(${i})" class="border border-blue-400 text-blue-600 px-6 py-1.5 rounded-full text-[11px] font-bold bg-blue-50 hover:bg-blue-100 transition shadow-sm">재고 카드 매핑하기</button>`
                         }
                     </td>
@@ -230,13 +239,13 @@
                 </tr>`;
         }
         mappingBody.innerHTML = rows;
-        const target = document.getElementById('view-sales-detail');
+
         switchSalesView('view-sales-detail');
     }
 
-    // 팝업 제어 로직
-    function openMappingPopup(rowIdx) {
-        currentTargetRow = rowIdx;
+    function openMappingPopup(idx) {
+        activeRowIndex = idx;
+        selectedCardNumber = null;
         document.getElementById('mappingPopup').classList.remove('hidden');
     }
 
@@ -244,14 +253,15 @@
         document.getElementById('mappingPopup').classList.add('hidden');
     }
 
-    function selectCard(cardNum) {
-        window.tempSelectedCard = cardNum;
+    function selectCardRow(row, num) {
+        row.querySelector('input[type="radio"]').checked = true;
+        selectedCardNumber = num;
     }
 
     function confirmMapping() {
-        if(!window.tempSelectedCard) { alert('카드를 선택해주세요.'); return; }
-        document.getElementById(`mapping_cell_${currentTargetRow}`).innerHTML = 
-            `<span class="text-blue-700 font-mono font-bold">${window.tempSelectedCard}</span>`;
+        if(!selectedCardNumber) { alert('매핑할 카드를 선택해주세요.'); return; }
+        const cell = document.getElementById(`mapping_cell_${activeRowIndex}`);
+        cell.innerHTML = `<span class="text-blue-700 font-mono font-bold">${selectedCardNumber}</span>`;
         closeMappingPopup();
     }
 </script>
