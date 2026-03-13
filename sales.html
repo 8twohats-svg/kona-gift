@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KONA BIZ - 판매 관리 통합 마스터본</title>
+    <title>KONA BIZ - 통합 판매 관리 (UI 완벽 복원 및 병합본)</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
@@ -20,8 +20,7 @@
         .form-row { display: flex; border-bottom: 1px solid #e5e7eb; min-height: 44px; background: #fff; }
         .form-row:first-child { border-top: 1px solid #e5e7eb; }
         .form-label { width: 160px; background-color: #f9fafb; padding: 0.75rem; font-size: 0.75rem; font-weight: 600; color: #374151; display: flex; align-items: center; border-right: 1px solid #e5e7eb; flex-shrink: 0; }
-        .form-content { flex: 1; padding: 0.75rem; display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; font-size: 0.75rem; }
-        
+        .form-content { flex: 1; padding: 0.75rem; display: flex; flex-col; gap: 0.5rem; font-size: 0.75rem; }
         .custom-scrollbar { overflow-x: auto !important; overflow-y: hidden !important; padding-bottom: 8px; scrollbar-width: auto; scroll-behavior: smooth; }
         .custom-scrollbar::-webkit-scrollbar { height: 14px !important; display: block !important; }
         .custom-scrollbar::-webkit-scrollbar-track { background: #f1f5f9; border-radius: 8px; border: 1px solid #cbd5e1; }
@@ -33,13 +32,11 @@
 
     <aside class="w-56 bg-kona-dark text-white flex flex-col hidden md:flex shrink-0 overflow-y-auto">
         <div class="h-16 flex items-center px-6 font-bold text-xl tracking-wider border-b border-gray-700 shrink-0">KONA BIZ</div>
-        <nav class="flex-1 py-4 text-xs font-medium space-y-1">
+        <nav class="flex-1 py-4 text-xs font-medium space-y-1 pb-10">
             <div class="px-6 py-3 opacity-60 cursor-pointer flex items-center gap-2 hover:opacity-100"><span>📊</span> 대시보드</div>
-            <div class="px-6 py-3 bg-white/10 cursor-pointer flex justify-between items-center mt-1">
-                <div class="flex items-center gap-2"><span>💳</span> 기프트카드 관리</div><span class="text-[10px]">▼</span>
-            </div>
+            <div class="px-6 py-3 bg-white/10 cursor-pointer flex justify-between items-center mt-1"><div class="flex items-center gap-2"><span>💳</span> 기프트카드 관리</div><span class="text-[10px]">▼</span></div>
             <div class="bg-[#0B132B] py-2">
-                <div id="nav-sales" onclick="switchView('view-list')" class="px-10 py-2 text-white font-bold border-l-2 border-white cursor-pointer transition">판매 관리</div>
+                <div onclick="switchView('view-list')" class="px-10 py-2 text-white font-bold border-l-2 border-white cursor-pointer transition">판매 관리</div>
             </div>
         </nav>
     </aside>
@@ -47,7 +44,7 @@
     <main class="flex-1 flex flex-col h-full bg-[#F5F6F8] relative overflow-hidden">
         <header class="h-12 border-b flex items-center justify-end px-6 gap-3 shadow-sm bg-white shrink-0 z-10"><div class="flex items-center gap-1 text-red-500 border border-red-200 rounded-full px-2 py-1 bg-red-50 text-xs">⏱ 10:40 연장</div><div class="flex items-center gap-1 bg-gray-100 px-3 py-1 rounded-full text-xs">👤 종*우 ⚙️</div></header>
 
-        <div id="view-list" class="flex-1 overflow-y-auto p-6 flex flex-col">
+        <div id="view-list" class="flex-1 overflow-y-auto p-6 flex flex-col w-full">
             <div class="flex justify-between items-center mb-4">
                 <h1 class="text-lg font-bold text-gray-900">판매 관리</h1>
                 <div class="flex gap-2">
@@ -65,7 +62,7 @@
                         <input type="text" class="input-kona flex-1 max-w-sm" placeholder="검색어를 입력해 주세요.">
                     </div>
                     <div class="col-span-1 font-bold text-gray-700 text-right pr-4">상태</div>
-                    <div class="col-span-2"><select class="input-kona w-full"><option>전체</option><option>결제완료</option><option>입금대기</option></select></div>
+                    <div class="col-span-2"><select class="input-kona w-full"><option>전체</option><option>입금대기</option><option>결제완료(매핑대기)</option><option>발급완료</option></select></div>
                 </div>
                 <div class="grid grid-cols-12 gap-4 items-center mb-3">
                     <div class="col-span-1 font-bold text-gray-700">거래 기간</div>
@@ -142,17 +139,13 @@
             <h3 class="text-sm font-bold text-gray-800 mb-2">결제 상세 정보</h3>
             <div class="bg-white border border-gray-300 mb-6 border-t-2 border-t-gray-500">
                 <div class="form-row">
-                    <div class="form-label">결제 수단/계좌</div>
-                    <div class="form-content w-1/3" id="dtl_payMethod_container">무통장입금 (가상계좌)</div>
-                    <div class="form-label border-l border-e5e7eb">결제 완료일시</div>
-                    <div class="form-content" id="dtl_payDate"></div>
+                    <div class="form-label">결제 수단/계좌</div><div class="form-content w-1/3" id="dtl_payMethod_container">무통장입금 (가상계좌)</div>
+                    <div class="form-label border-l border-e5e7eb">결제 완료일시</div><div class="form-content" id="dtl_payDate"></div>
                 </div>
                 <div class="form-row bg-blue-50/20"><div class="form-label font-bold text-black">총 결제 금액</div><div class="form-content font-bold text-lg text-blue-600" id="dtl_totalPrice"></div></div>
             </div>
 
-            <div class="flex justify-between items-end mb-2">
-                <h3 class="text-sm font-bold text-gray-800" id="dtl_cardListTitle">지급 대상 카드 매핑</h3>
-            </div>
+            <div class="flex justify-between items-end mb-2"><h3 class="text-sm font-bold text-gray-800" id="dtl_cardListTitle">지급 대상 카드 매핑</h3></div>
             <div class="bg-white border border-gray-300 shadow-sm mb-10 rounded-lg overflow-hidden">
                 <div class="w-full overflow-x-auto">
                     <table class="w-full text-center text-xs kona-table min-w-[800px]">
@@ -170,9 +163,27 @@
             <div class="bg-white border border-gray-300 mb-6 border-t-2 border-t-gray-500">
                 <div class="form-row border-none">
                     <div class="form-label bg-gray-50 border-r border-gray-200">대상 고객 *</div>
-                    <div class="form-content flex-col items-start gap-3">
+                    <div class="form-content flex-col items-start gap-2">
                         <button onclick="openCustomerSearchModal('recharge')" class="bg-[#121F3D] text-white px-5 py-1.5 rounded text-xs font-bold shadow hover:bg-black flex items-center gap-1">🔍 고객 검색</button>
-                        <div id="rec_customer_info_box" class="hidden mt-1 p-3 border border-gray-200 bg-gray-50 rounded w-full max-w-md"></div>
+                        <div id="rec_customer_info_box" class="hidden mt-1 p-3 border border-gray-200 bg-white rounded w-full max-w-md shadow-sm">
+                            <div class="flex items-center gap-2 mb-1">
+                                <span class="bg-[#121F3D] text-white px-2 py-0.5 rounded text-[10px] font-bold" id="rec_lbl_type">개인</span>
+                                <span class="font-bold text-sm text-black" id="rec_lbl_name">홍길동</span>
+                            </div>
+                            <div class="text-gray-500 text-xs" id="rec_lbl_contact">휴대폰번호: 010-1234-5678 | 이메일: hong@gmail.com</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="text-sm font-bold text-gray-800 mb-2 mt-2">결제 및 발송 정보</h3>
+            <div class="bg-white border border-gray-300 mb-6 border-t-2 border-t-gray-500">
+                <div class="form-row"><div class="form-label bg-gray-50 border-r border-gray-200">결제 수단 *</div><div class="form-content"><label class="flex items-center gap-1 font-bold text-xs"><input type="radio" checked class="chk-kona"> 무통장입금 (가상계좌)</label></div></div>
+                <div class="form-row">
+                    <div class="form-label bg-gray-50 border-r border-gray-200">결제 요청 발송 *</div>
+                    <div class="form-content flex-row items-center gap-4">
+                        <label class="flex items-center gap-1.5 cursor-pointer text-xs font-bold"><input type="checkbox" id="rec_sms_chk" checked class="chk-kona"> 문자 (SMS)</label>
+                        <label class="flex items-center gap-1.5 cursor-pointer text-xs font-bold"><input type="checkbox" id="rec_email_chk" checked class="chk-kona"> 이메일</label>
                     </div>
                 </div>
             </div>
@@ -188,12 +199,6 @@
                 <div class="bg-gray-50 p-4 border-t flex justify-end items-center gap-4"><span class="text-xs font-bold text-gray-700">총 결제 요청 금액:</span><span class="text-2xl font-bold text-blue-800" id="rechargeTotalPrice">0</span><span class="text-sm font-bold text-gray-800">원</span></div>
             </div>
 
-            <h3 class="text-sm font-bold text-gray-800 mb-2 mt-4">결제 정보</h3>
-            <div class="bg-white border border-gray-300 mb-6 border-t-2 border-t-gray-500">
-                <div class="form-row"><div class="form-label bg-gray-50 border-r border-gray-200">결제 수단 *</div><div class="form-content"><label class="flex items-center gap-1 font-bold text-xs"><input type="radio" checked class="chk-kona"> 무통장입금 (가상계좌)</label></div></div>
-                <div class="form-row"><div class="form-label bg-gray-50 border-r border-gray-200">결제 요청 발송 *</div><div class="form-content flex-row items-center gap-4"><label class="flex items-center gap-1.5 cursor-pointer text-xs font-bold"><input type="checkbox" id="rec_sms_chk" checked class="chk-kona"> 문자 (SMS)</label><label class="flex items-center gap-1.5 cursor-pointer text-xs font-bold"><input type="checkbox" id="rec_email_chk" checked class="chk-kona"> 이메일</label></div></div>
-            </div>
-
             <div class="flex justify-center gap-2 mt-auto pb-10"><button onclick="switchView('view-list')" class="btn-outline px-10 py-2.5 font-bold">취소</button><button onclick="submitRecharge()" class="bg-[#1636d6] text-white rounded-full px-10 py-2.5 font-bold shadow-md hover:bg-blue-800">결제 등록 및 발송</button></div>
         </div>
 
@@ -202,23 +207,42 @@
             
             <h3 class="text-sm font-bold text-gray-800 mb-2">고객 선택</h3>
             <div class="bg-white border border-gray-300 mb-6 border-t-2 border-t-gray-500">
-                <div class="form-row border-none"><div class="form-label bg-gray-50 border-r border-gray-200">대상 고객 *</div><div class="form-content flex-col items-start gap-3"><button onclick="openCustomerSearchModal('sales')" class="bg-[#121F3D] text-white px-5 py-1.5 rounded text-xs font-bold shadow hover:bg-black flex items-center gap-1">🔍 고객 검색</button><div id="sales_customer_info_box" class="hidden mt-1 p-3 border border-gray-200 bg-gray-50 rounded w-full max-w-md"></div></div></div>
+                <div class="form-row border-none">
+                    <div class="form-label bg-gray-50 border-r border-gray-200">대상 고객 *</div>
+                    <div class="form-content flex-col items-start gap-2">
+                        <button onclick="openCustomerSearchModal('sales')" class="bg-[#121F3D] text-white px-5 py-1.5 rounded text-xs font-bold shadow hover:bg-black flex items-center gap-1">🔍 고객 검색</button>
+                        <div id="sales_customer_info_box" class="hidden mt-1 p-3 border border-gray-200 bg-white rounded w-full max-w-md shadow-sm"></div>
+                    </div>
+                </div>
             </div>
 
-            <div class="flex justify-between items-end mb-2 mt-4"><h3 class="text-sm font-bold text-gray-800">발급 대상 상품 및 권종 목록</h3><button onclick="openItemAddModal()" class="bg-blue-50 border border-blue-300 text-blue-700 px-4 py-1.5 rounded text-xs font-bold shadow-sm hover:bg-blue-100">+ 상품/권종 추가</button></div>
-            <div class="bg-white border border-gray-300 shadow-sm mb-6">
-                <div class="table-container w-full overflow-x-auto"><table class="w-full text-center text-xs kona-table min-w-[800px]"><thead class="bg-[#121F3D] text-white"><tr><th class="py-3 w-12">NO</th><th class="py-3 text-left pl-4">상품명</th><th class="py-3 w-32 text-right pr-4">결제 금액(권종)</th><th class="py-3 w-64">재고 카드 매핑</th><th class="py-3 w-16">삭제</th></tr></thead><tbody id="sales_cart_body" class="text-gray-700"><tr><td colspan="5" class="py-10 text-gray-400 bg-gray-50 text-center">우측 상단의 [+ 상품/권종 추가] 버튼을 눌러주세요.</td></tr></tbody></table></div>
-                <div class="bg-gray-50 p-4 border-t flex justify-end items-center gap-4"><span class="text-xs font-bold text-gray-700">총 결제 요청 금액:</span><span class="text-2xl font-bold text-blue-800" id="sales_total_price">0</span><span class="text-sm font-bold text-gray-800">원</span></div>
-            </div>
-
-            <h3 class="text-sm font-bold text-gray-800 mb-2 mt-4">결제 정보</h3>
+            <h3 class="text-sm font-bold text-gray-800 mb-2 mt-2">결제 및 발송 정보</h3>
             <div class="bg-white border border-gray-300 mb-6 border-t-2 border-t-gray-500">
                 <div class="form-row"><div class="form-label bg-gray-50 border-r border-gray-200">결제 수단 *</div><div class="form-content"><label class="flex items-center gap-1 font-bold text-xs"><input type="radio" checked class="chk-kona"> 무통장입금 (가상계좌)</label></div></div>
-                <div class="form-row"><div class="form-label bg-gray-50 border-r border-gray-200">결제 요청 발송 *</div><div class="form-content flex-row items-center gap-4"><label class="flex items-center gap-1.5 cursor-pointer text-xs font-bold"><input type="checkbox" id="sales_sms_chk" checked class="chk-kona"> 문자 (SMS)</label><label class="flex items-center gap-1.5 cursor-pointer text-xs font-bold"><input type="checkbox" id="sales_email_chk" checked class="chk-kona"> 이메일</label></div></div>
+                <div class="form-row">
+                    <div class="form-label bg-gray-50 border-r border-gray-200">결제 요청 발송 *</div>
+                    <div class="form-content flex-row items-center gap-4">
+                        <label class="flex items-center gap-1.5 cursor-pointer text-xs font-bold"><input type="checkbox" id="sales_sms_chk" checked class="chk-kona"> 문자 (SMS)</label>
+                        <label class="flex items-center gap-1.5 cursor-pointer text-xs font-bold"><input type="checkbox" id="sales_email_chk" checked class="chk-kona"> 이메일</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex justify-between items-end mb-2 mt-4">
+                <h3 class="text-sm font-bold text-gray-800">발급 대상 상품 및 권종 목록</h3>
+                <button onclick="openItemAddModal()" class="bg-blue-50 border border-blue-300 text-blue-700 px-4 py-1.5 rounded text-xs font-bold shadow-sm hover:bg-blue-100">+ 상품/권종 추가</button>
+            </div>
+            <div class="bg-white border border-gray-300 shadow-sm mb-6">
+                <div class="table-container w-full overflow-x-auto">
+                    <table class="w-full text-center text-xs kona-table min-w-[800px]"><thead class="bg-[#121F3D] text-white"><tr><th class="py-3 w-12">NO</th><th class="py-3 text-left pl-4">상품명</th><th class="py-3 w-32 text-right pr-4">결제 금액(권종)</th><th class="py-3 w-64">재고 카드 매핑</th><th class="py-3 w-16">삭제</th></tr></thead>
+                    <tbody id="sales_cart_body" class="text-gray-700"><tr><td colspan="5" class="py-10 text-gray-400 bg-gray-50 text-center">우측 상단의 [+ 상품/권종 추가] 버튼을 눌러주세요.</td></tr></tbody></table>
+                </div>
+                <div class="bg-gray-50 p-4 border-t flex justify-end items-center gap-4"><span class="text-xs font-bold text-gray-700">총 결제 요청 금액:</span><span class="text-2xl font-bold text-blue-800" id="sales_total_price">0</span><span class="text-sm font-bold text-gray-800">원</span></div>
             </div>
 
             <div class="flex justify-center gap-2 mt-auto pb-10"><button onclick="switchView('view-list')" class="btn-outline px-10 py-2.5 font-bold">취소</button><button onclick="submitNewIssue()" class="bg-[#121F3D] text-white rounded-full px-10 py-2.5 font-bold shadow-md hover:bg-black">결제 등록 및 발송</button></div>
         </div>
+
     </main>
 
     <div id="customerSearchModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
@@ -227,7 +251,8 @@
             <div class="p-6 flex flex-col gap-4 bg-white">
                 <div class="flex gap-2"><select class="input-kona w-32"><option>이름/법인명</option><option>휴대폰번호</option></select><input type="text" class="input-kona flex-1" placeholder="검색어를 입력하세요"><button onclick="renderDummyCustomerResults()" class="bg-[#121F3D] text-white px-5 rounded text-xs font-bold">조회</button></div>
                 <div class="border border-gray-200 h-48 overflow-y-auto mt-2">
-                    <table class="w-full text-center text-xs"><thead class="bg-gray-100 sticky top-0 shadow-sm"><tr><th class="py-2">구분</th><th class="py-2">이름(법인명)</th><th class="py-2">휴대폰번호</th><th class="py-2">선택</th></tr></thead><tbody id="customerSearchResultBody"><tr><td colspan="4" class="py-8 text-gray-400">검색어를 입력하고 조회를 눌러주세요.</td></tr></tbody></table>
+                    <table class="w-full text-center text-xs"><thead class="bg-gray-100 sticky top-0 shadow-sm"><tr><th class="py-2">구분</th><th class="py-2">이름(법인명)</th><th class="py-2">휴대폰/이메일</th><th class="py-2">선택</th></tr></thead>
+                    <tbody id="customerSearchResultBody"><tr><td colspan="4" class="py-8 text-gray-400">검색어를 입력하고 조회를 눌러주세요.</td></tr></tbody></table>
                 </div>
             </div>
         </div>
@@ -260,16 +285,6 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="bg-white border border-gray-200 rounded shadow-sm overflow-hidden" id="prod2-wrapper">
-                            <div class="p-4 bg-gray-50 border-b border-gray-200 flex justify-between items-center" id="prod2-header">
-                                <span class="font-bold text-gray-800 text-base" id="prod2-title">더한옥 VIP 상품권</span>
-                                <label class="flex items-center gap-2 cursor-pointer"><span class="text-xs font-bold text-gray-600">판매 운영</span><div class="relative inline-block w-10 align-middle select-none"><input type="checkbox" class="peer sr-only toggle-checkbox" onchange="toggleProduct(this, 'prod2-body')"/><div class="w-10 h-6 bg-gray-300 rounded-full peer-checked:bg-[#1636d6] transition-colors duration-200 ease-in-out"></div><div class="dot absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition-transform duration-200 ease-in-out peer-checked:translate-x-4"></div></div></label>
-                            </div>
-                            <div id="prod2-body" class="p-5 hidden">
-                                <div class="flex gap-2 mb-4 pb-4 border-b border-gray-100"><input type="text" id="newDenomInput2" class="input-kona flex-1 max-w-xs" placeholder="금액 입력 (숫자만)"><button onclick="addDenom('newDenomInput2', 'denomContainer2')" class="bg-[#121F3D] text-white px-5 py-1.5 rounded text-xs font-bold shadow hover:bg-black">+ 권종 추가</button></div>
-                                <div id="denomContainer2" class="flex flex-col gap-2"></div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -299,57 +314,64 @@
     </div>
 
     <script>
+        function scrollTable(button, offset) { const container = button.parentNode.querySelector('.custom-scrollbar'); if(container) container.scrollBy({ left: offset, behavior: 'smooth' }); }
+
         function switchView(viewId) {
-            document.querySelectorAll('main > div[id^="view-"]').forEach(div => { div.classList.add('hidden'); div.classList.remove('flex'); });
-            document.getElementById(viewId).classList.remove('hidden'); document.getElementById(viewId).classList.add('flex');
+            const views = ['view-list', 'view-request-detail', 'view-recharge', 'view-sales-new'];
+            views.forEach(id => { const el = document.getElementById(id); if (el) { el.classList.add('hidden'); el.classList.remove('flex'); } });
+            const target = document.getElementById(viewId);
+            if (target) { target.classList.remove('hidden'); target.classList.add('flex'); }
         }
 
         // ================= [상세 내역 동적 로딩 (데이터 꽉 채움 복구본)] =================
-        function showRequestDetail(orderId, status, buyerType) {
+        function showSalesDetail(orderId, status, buyerType) {
             document.getElementById('dtl_orderId').innerText = orderId;
-            const statusEl = document.getElementById('req_status'); const btnArea = document.getElementById('reqActionButtons'); const cardTable = document.getElementById('req_cardTable');
+            const statusEl = document.getElementById('dtl_status'); const btnArea = document.getElementById('dtl_actionButtons'); const cardTable = document.getElementById('dtl_cardTable');
             const payMethodContainer = document.getElementById('dtl_payMethod_container');
             
-            document.getElementById('req_buyerTypeBadge').innerText = buyerType;
+            document.getElementById('dtl_buyerTypeBadge').innerText = buyerType;
             if(buyerType === '개인') {
-                document.getElementById('req_buyerName').innerText = '홍길동';
-                document.getElementById('req_buyerContact').innerHTML = '010-1234-5678 <span class="text-gray-300 mx-2">|</span> hong@gmail.com';
+                document.getElementById('dtl_buyerName').innerText = '이신청';
+                document.getElementById('dtl_buyerContact').innerHTML = '010-1111-2222 <span class="text-gray-300 mx-2">|</span> lee@gmail.com';
             } else {
-                document.getElementById('req_buyerName').innerText = '김코나 ((주)코나아이)';
-                document.getElementById('req_buyerContact').innerHTML = '010-9999-8888 <span class="text-gray-300 mx-2">|</span> kona@konai.com';
+                document.getElementById('dtl_buyerName').innerText = '김코나 ((주)코나아이)';
+                document.getElementById('dtl_buyerContact').innerHTML = '010-9999-8888 <span class="text-gray-300 mx-2">|</span> kona@konai.com';
             }
 
             if (status === 'pending') { 
                 statusEl.innerHTML = '<span class="text-gray-500 font-bold bg-gray-200 px-2 py-0.5 rounded">입금대기</span>';
                 document.getElementById('dtl_payDate').innerHTML = '-';
-                document.getElementById('req_totalPrice').innerHTML = '1,000,000 원';
+                document.getElementById('dtl_totalPrice').innerHTML = '1,000,000 원';
+                document.getElementById('dtl_cardListTitle').innerHTML = '지급 대상 카드 매핑 <span class="text-xs font-normal text-red-500 ml-2">※ 카드를 매핑 후 결제 링크를 재발송할 수 있습니다.</span>';
                 
                 payMethodContainer.innerHTML = `<div class="flex items-center gap-2"><span class="font-bold">무통장입금 (가상계좌)</span><span class="text-blue-600 font-bold ml-2">우리은행 2819-1043-1234</span><button class="border border-gray-300 px-2 py-0.5 rounded text-[10px] bg-white hover:bg-gray-100" onclick="alert('가상계좌번호가 복사되었습니다.')">복사</button></div>`;
-                btnArea.innerHTML = `<button class="bg-blue-50 border border-blue-600 text-blue-700 px-4 py-1.5 rounded-full text-xs font-bold shadow-sm hover:bg-blue-100" onclick="alert('결제 정보가 재발송되었습니다.');">결제 정보 재발송</button><button onclick="switchView('view-list')" class="btn-outline ml-2">목록</button>`;
+                btnArea.innerHTML = `<button class="bg-blue-50 border border-blue-600 text-blue-700 px-4 py-1.5 rounded-full text-xs font-bold shadow-sm hover:bg-blue-100" onclick="alert('결제 정보가 재발송되었습니다.');">결제 링크 재전송</button><button onclick="switchView('view-list')" class="btn-outline ml-2">목록</button>`;
                 
                 cardTable.innerHTML = `
-                    <tr class="border-b bg-white"><td>1</td><td class="text-left pl-4 font-bold text-gray-900">더한옥 VIP 상품권(500,000원)</td><td class="text-gray-400">입금 대기중</td><td class="text-right pr-4 font-bold text-blue-800">500,000</td></tr>
-                    <tr class="border-b bg-white"><td>2</td><td class="text-left pl-4 font-bold text-gray-900">더한옥 VIP 상품권(500,000원)</td><td class="text-gray-400">입금 대기중</td><td class="text-right pr-4 font-bold text-blue-800">500,000</td></tr>
+                    <tr class="border-b bg-white"><td>1</td><td class="text-left pl-4 font-bold text-gray-900">더한옥 VIP 상품권(500,000원)</td><td id="req_card_td_1"><button onclick="activeMappingId='req_1'; openMappingModal()" class="border border-blue-400 text-blue-700 bg-blue-50 px-4 py-1.5 text-xs rounded-full font-bold shadow-sm hover:bg-blue-100">재고 카드 매핑하기</button></td><td class="text-right pr-4 font-bold text-blue-800">500,000</td></tr>
+                    <tr class="border-b bg-white"><td>2</td><td class="text-left pl-4 font-bold text-gray-900">더한옥 VIP 상품권(500,000원)</td><td id="req_card_td_2"><button onclick="activeMappingId='req_2'; openMappingModal()" class="border border-blue-400 text-blue-700 bg-blue-50 px-4 py-1.5 text-xs rounded-full font-bold shadow-sm hover:bg-blue-100">재고 카드 매핑하기</button></td><td class="text-right pr-4 font-bold text-blue-800">500,000</td></tr>
                 `;
             } 
             else if (status === 'paid') {
                 statusEl.innerHTML = '<span class="text-red-500 font-bold bg-red-50 px-2 py-0.5 rounded border border-red-200">결제완료 (매핑대기)</span>';
                 document.getElementById('dtl_payDate').innerText = '2026/03/15 16:30:00';
-                document.getElementById('req_totalPrice').innerHTML = '600,000 원';
+                document.getElementById('dtl_totalPrice').innerHTML = '600,000 원';
+                document.getElementById('dtl_cardListTitle').innerHTML = '지급 대상 카드 매핑 <span class="text-xs font-normal text-gray-500 ml-2">※ 모든 카드를 매핑 후 등록 완료를 눌러주세요.</span>';
                 
                 payMethodContainer.innerHTML = '무통장입금 (가상계좌) <span class="text-gray-500 ml-2">우리은행 2819-1043-1234</span>';
                 btnArea.innerHTML = `<button class="bg-[#121F3D] text-white px-6 py-2 rounded-full text-xs font-bold shadow-md hover:bg-black" onclick="submitRegistration()">등록 완료 (포인트 지급)</button><button onclick="switchView('view-list')" class="btn-outline ml-2">목록</button>`;
                 
                 cardTable.innerHTML = `
-                    <tr class="border-b bg-white"><td>1</td><td class="text-left pl-4 font-bold text-gray-900">더한옥헤리티지하우스 상품권(200,000원)</td><td id="req_card_td_1"><button onclick="activeMappingId='req_1'; openMappingModal()" class="border border-blue-400 text-blue-700 bg-blue-50 px-4 py-1.5 text-xs rounded-full font-bold shadow-sm hover:bg-blue-100">재고 카드 매핑하기</button></td><td class="text-right pr-4 font-bold text-blue-800">200,000</td></tr>
-                    <tr class="border-b bg-white"><td>2</td><td class="text-left pl-4 font-bold text-gray-900">더한옥헤리티지하우스 상품권(200,000원)</td><td id="req_card_td_2"><button onclick="activeMappingId='req_2'; openMappingModal()" class="border border-blue-400 text-blue-700 bg-blue-50 px-4 py-1.5 text-xs rounded-full font-bold shadow-sm hover:bg-blue-100">재고 카드 매핑하기</button></td><td class="text-right pr-4 font-bold text-blue-800">200,000</td></tr>
-                    <tr class="border-b bg-white"><td>3</td><td class="text-left pl-4 font-bold text-gray-900">더한옥헤리티지하우스 상품권(200,000원)</td><td id="req_card_td_3"><button onclick="activeMappingId='req_3'; openMappingModal()" class="border border-blue-400 text-blue-700 bg-blue-50 px-4 py-1.5 text-xs rounded-full font-bold shadow-sm hover:bg-blue-100">재고 카드 매핑하기</button></td><td class="text-right pr-4 font-bold text-blue-800">200,000</td></tr>
+                    <tr class="border-b bg-white"><td>1</td><td class="text-left pl-4 font-bold text-gray-900">더한옥헤리티지하우스 상품권(200,000원)</td><td id="req_card_td_3"><button onclick="activeMappingId='req_3'; openMappingModal()" class="border border-blue-400 text-blue-700 bg-blue-50 px-4 py-1.5 text-xs rounded-full font-bold shadow-sm hover:bg-blue-100">재고 카드 매핑하기</button></td><td class="text-right pr-4 font-bold text-blue-800">200,000</td></tr>
+                    <tr class="border-b bg-white"><td>2</td><td class="text-left pl-4 font-bold text-gray-900">더한옥헤리티지하우스 상품권(200,000원)</td><td id="req_card_td_4"><button onclick="activeMappingId='req_4'; openMappingModal()" class="border border-blue-400 text-blue-700 bg-blue-50 px-4 py-1.5 text-xs rounded-full font-bold shadow-sm hover:bg-blue-100">재고 카드 매핑하기</button></td><td class="text-right pr-4 font-bold text-blue-800">200,000</td></tr>
+                    <tr class="border-b bg-white"><td>3</td><td class="text-left pl-4 font-bold text-gray-900">더한옥헤리티지하우스 상품권(200,000원)</td><td id="req_card_td_5"><button onclick="activeMappingId='req_5'; openMappingModal()" class="border border-blue-400 text-blue-700 bg-blue-50 px-4 py-1.5 text-xs rounded-full font-bold shadow-sm hover:bg-blue-100">재고 카드 매핑하기</button></td><td class="text-right pr-4 font-bold text-blue-800">200,000</td></tr>
                 `;
             } 
             else {
                 statusEl.innerHTML = '<span class="text-green-600 font-bold">발급완료</span>';
                 document.getElementById('dtl_payDate').innerText = '2026/03/15 16:10:00';
-                document.getElementById('req_totalPrice').innerHTML = '3,500,000 원';
+                document.getElementById('dtl_totalPrice').innerHTML = '3,500,000 원';
+                document.getElementById('dtl_cardListTitle').innerHTML = '카드 발급 정보 <span class="text-xs font-normal text-gray-500 ml-2">총 8장</span>';
                 
                 payMethodContainer.innerHTML = '무통장입금 (가상계좌) <span class="text-gray-500 ml-2">우리은행 2819-1043-1234</span>';
                 btnArea.innerHTML = `<button onclick="switchView('view-list')" class="btn-outline">목록</button>`;
@@ -364,15 +386,15 @@
         }
 
         function submitRegistration() {
-            const tds = [document.getElementById('req_card_td_1'), document.getElementById('req_card_td_2'), document.getElementById('req_card_td_3')];
+            const tds = [document.getElementById('req_card_td_3'), document.getElementById('req_card_td_4'), document.getElementById('req_card_td_5')];
             let allMapped = true;
             tds.forEach(td => { if(td && td.innerHTML.includes('button')) allMapped = false; });
             if(!allMapped) { alert('모든 상품에 카드를 매핑해주세요.'); return; }
             alert('등록이 완료되어 해당 카드로 포인트가 지급되었습니다.');
-            showRequestDetail('REQ-260315-02', 'issued', '법인');
+            showSalesDetail('REQ-260315-02', 'issued', '법인');
         }
 
-        // ================= [판매 정책 관리 팝업 스크립트] =================
+        // ================= [판매 정책 팝업 관리 로직] =================
         function toggleProduct(checkbox, bodyId) {
             const body = document.getElementById(bodyId); const wrapper = checkbox.closest('.bg-white.border'); const header = checkbox.closest('.p-4'); const title = header.querySelector('span.text-base');
             if (checkbox.checked) {
@@ -405,12 +427,14 @@
             activeFlow = flow;
             if(flow === 'recharge') {
                 document.getElementById('rec_customer_info_box').classList.add('hidden');
+                document.getElementById('rec_customer_info_box').innerHTML = '';
                 document.getElementById('rec_table_hint').classList.remove('hidden');
                 document.getElementById('rechargeTableBody').innerHTML = `<tr><td colspan="5" class="py-10 text-gray-400 bg-gray-50 text-center">고객을 먼저 검색해 주세요.</td></tr>`;
                 document.getElementById('rechargeTotalPrice').innerText = '0';
                 switchView('view-recharge');
             } else {
                 document.getElementById('sales_customer_info_box').classList.add('hidden');
+                document.getElementById('sales_customer_info_box').innerHTML = '';
                 orderItems = []; renderSalesCart();
                 switchView('view-sales-new');
             }
@@ -431,13 +455,19 @@
             const isCorp = type === '법인';
             let badge = isCorp ? `<span class="bg-kona-dark text-white px-2 py-0.5 rounded text-[10px]">법인</span>` : `<span class="bg-blue-600 text-white px-2 py-0.5 rounded text-[10px]">개인</span>`;
             let displayName = isCorp ? `${name} (${corpName})` : name;
-            let html = `<div class="flex items-center gap-2 mb-1 p-2">${badge} <span class="font-bold text-sm text-black">${displayName}</span> <span class="text-gray-500 text-sm">(${phone})</span></div>`;
+            let html = `
+                <div class="flex items-center gap-2 mb-1">
+                    ${badge} <span class="font-bold text-sm text-black">${displayName}</span>
+                </div>
+                <div class="text-gray-500 text-xs">휴대폰번호: ${phone} | 이메일: example@gmail.com</div>
+            `;
 
             if (activeFlow === 'recharge') {
                 document.getElementById('rec_customer_info_box').innerHTML = html;
                 document.getElementById('rec_customer_info_box').classList.remove('hidden');
                 document.getElementById('rec_table_hint').classList.add('hidden');
                 
+                // 다중 상품 모의 로드
                 document.getElementById('rechargeTableBody').innerHTML = `
                     <tr class="border-b bg-white"><td class="py-3"><input type="checkbox" class="chk-kona cursor-pointer" onclick="event.preventDefault();"></td><td class="text-left pl-4 font-bold text-gray-800">더한옥헤리티지하우스 상품권</td><td class="font-mono text-gray-500">9411-1234-****-5678</td><td class="text-right pr-4 text-gray-500">0</td><td class="px-4 pr-4"><input type="text" class="input-kona text-right font-bold text-blue-900 bg-blue-50 py-1.5" placeholder="충전 금액 입력" onkeyup="calcRechargeTotal(this)"></td></tr>
                     <tr class="border-b bg-white"><td class="py-3"><input type="checkbox" class="chk-kona cursor-pointer" onclick="event.preventDefault();"></td><td class="text-left pl-4 font-bold text-gray-800">더한옥 VIP 상품권</td><td class="font-mono text-gray-500">9411-5555-****-7777</td><td class="text-right pr-4 text-gray-500">500,000</td><td class="px-4 pr-4"><input type="text" class="input-kona text-right font-bold text-blue-900 bg-blue-50 py-1.5" placeholder="충전 금액 입력" onkeyup="calcRechargeTotal(this)"></td></tr>
@@ -461,6 +491,7 @@
             });
             document.getElementById('rechargeTotalPrice').innerText = total.toLocaleString();
         }
+
         function submitRecharge() { alert('충전 결제 링크가 전송되었습니다.'); switchView('view-list'); }
 
         // 신규 발급 장바구니 로직
