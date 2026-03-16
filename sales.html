@@ -185,7 +185,7 @@
 
     <div class="flex items-end gap-2 mb-2">
         <h3 class="text-sm font-bold text-gray-800">지급 대상 카드 정보</h3>
-        <span class="text-xs font-normal text-red-500" id="req_table_hint">※ 입금 완료 후 매핑이 가능합니다.</span>
+        <span class="text-xs font-normal text-red-500" id="req_table_hint">※ 결제 완료 후 매핑이 가능합니다.</span>
     </div>
     <div class="bg-white border border-gray-300 rounded shadow-sm overflow-hidden mb-10">
         <table class="w-full text-center text-[13px]">
@@ -290,12 +290,12 @@
     </div>
     <div class="bg-white border border-gray-300 shadow-sm rounded mb-6 overflow-hidden">
         <div class="w-full overflow-x-auto pb-2">
-            <table class="w-full text-center text-[13px] min-w-[800px]">
+            <table class="w-full text-center text-[13px] min-w-[600px]">
                 <thead class="bg-[#121F3D] text-white">
-                    <tr><th class="py-3 px-2 border-r border-[#2a3754] w-12">NO</th><th class="py-3 px-4 border-r border-[#2a3754] text-left pl-4">상품명</th><th class="py-3 px-4 border-r border-[#2a3754] w-48 text-right pr-6">결제 금액(권종)</th><th class="py-3 px-4 border-r border-[#2a3754] w-64">재고 카드 매핑</th><th class="py-3 px-2 w-16">삭제</th></tr>
+                    <tr><th class="py-3 px-2 border-r border-[#2a3754] w-12">NO</th><th class="py-3 px-4 border-r border-[#2a3754] text-left pl-4">상품명</th><th class="py-3 px-4 border-r border-[#2a3754] w-48 text-right pr-6">결제 금액(권종)</th><th class="py-3 px-2 w-16">삭제</th></tr>
                 </thead>
                 <tbody id="sales_cart_body" class="text-gray-700">
-                    <tr><td colspan="5" class="py-12 text-gray-400 bg-gray-50 text-center">우측 상단의 [+ 상품/권종 추가] 버튼을 눌러주세요.</td></tr>
+                    <tr><td colspan="4" class="py-12 text-gray-400 bg-gray-50 text-center">우측 상단의 [+ 상품/권종 추가] 버튼을 눌러주세요.</td></tr>
                 </tbody>
             </table>
         </div>
@@ -308,7 +308,7 @@
 
     <div class="flex justify-center gap-2 mt-auto pb-10">
         <button onclick="switchView('view-list')" class="border border-gray-300 bg-white text-gray-700 px-10 py-2.5 rounded-full text-sm font-bold hover:bg-gray-50 transition">취소</button>
-        <button onclick="submitNewIssue()" class="bg-[#121F3D] text-white px-10 py-2.5 rounded-full text-sm font-bold shadow hover:bg-black transition">결제 등록 및 발송</button>
+        <button onclick="submitNewIssue()" class="bg-[#121F3D] text-white px-10 py-2.5 rounded-full text-sm font-bold shadow hover:bg-black transition">결제 요청 및 발송</button>
     </div>
 </div>
 
@@ -356,8 +356,8 @@
                         <div id="prod1-body" class="p-5 block text-sm">
                             <div class="flex gap-2 mb-4 pb-4 border-b border-gray-100"><input type="text" id="newDenomInput1" class="border border-gray-300 px-3 py-1.5 rounded outline-none flex-1 max-w-xs focus:border-blue-600" placeholder="금액 입력 (숫자만)"><button onclick="addDenom('newDenomInput1', 'denomContainer1')" class="bg-[#121F3D] text-white px-5 py-1.5 rounded font-bold shadow hover:bg-black transition">+ 권종 추가</button></div>
                             <div id="denomContainer1" class="flex flex-col gap-2">
-                                <div class="flex items-center justify-between border border-gray-200 p-2.5 rounded bg-white shadow-sm"><span class="font-bold text-blue-800 ml-2">100,000원</span><div class="flex items-center gap-4"><select class="border border-gray-300 px-2 py-1 rounded text-xs font-bold outline-none"><option>사용</option><option>미사용</option></select><button onclick="this.closest('div.flex').remove()" class="text-red-500 font-bold hover:text-red-700 text-lg leading-none mr-2">&times;</button></div></div>
-                                <div class="flex items-center justify-between border border-gray-200 p-2.5 rounded bg-white shadow-sm"><span class="font-bold text-blue-800 ml-2">200,000원</span><div class="flex items-center gap-4"><select class="border border-gray-300 px-2 py-1 rounded text-xs font-bold outline-none"><option>사용</option><option>미사용</option></select><button onclick="this.closest('div.flex').remove()" class="text-red-500 font-bold hover:text-red-700 text-lg leading-none mr-2">&times;</button></div></div>
+                                <div class="flex items-center justify-between border border-gray-200 p-2.5 rounded bg-white shadow-sm"><span class="font-bold text-blue-800 ml-2">100,000원</span><div class="flex items-center gap-4"><select class="border border-gray-300 px-2 py-1 rounded text-xs font-bold outline-none"><option>사용</option><option>미사용</option></select><button onclick="this.parentElement.parentElement.remove()" class="text-red-500 font-bold hover:text-red-700 text-lg leading-none mr-2">&times;</button></div></div>
+                                <div class="flex items-center justify-between border border-gray-200 p-2.5 rounded bg-white shadow-sm"><span class="font-bold text-blue-800 ml-2">200,000원</span><div class="flex items-center gap-4"><select class="border border-gray-300 px-2 py-1 rounded text-xs font-bold outline-none"><option>사용</option><option>미사용</option></select><button onclick="this.parentElement.parentElement.remove()" class="text-red-500 font-bold hover:text-red-700 text-lg leading-none mr-2">&times;</button></div></div>
                             </div>
                         </div>
                     </div>
@@ -378,8 +378,8 @@
             </div>
         </div>
         <div class="p-4 border-t border-gray-200 flex justify-center gap-2 bg-white">
-            <button onclick="closePolicyModal()" class="border border-gray-300 px-8 py-2.5 rounded-full text-xs font-bold text-gray-700 hover:bg-gray-50 transition">닫기</button>
-            <button class="bg-[#1636d6] text-white px-10 py-2.5 rounded-full text-xs font-bold shadow-sm hover:bg-blue-800 transition" onclick="alert('판매 정책이 저장되었습니다.'); closePolicyModal();">정책 저장</button>
+            <button onclick="closePolicyModal()" class="border border-gray-300 px-8 py-2.5 rounded-full text-sm font-bold text-gray-700 hover:bg-gray-50 transition">닫기</button>
+            <button class="bg-[#1636d6] text-white px-10 py-2.5 rounded-full text-sm font-bold shadow-sm hover:bg-blue-800 transition" onclick="alert('판매 정책이 저장되었습니다.'); closePolicyModal();">정책 저장</button>
         </div>
     </div>
 </div>
@@ -416,7 +416,7 @@
 </div>
 
 <script>
-    // 화면 전환 (겹침 방지를 위해 명시적 ID 목록 사용)
+    // 1. 뷰 전환 제어
     function switchView(viewId) {
         const views = ['view-list', 'view-request-detail', 'view-recharge', 'view-sales-new'];
         views.forEach(id => {
@@ -427,7 +427,7 @@
         if (target) { target.classList.remove('hidden'); target.classList.add('flex'); }
     }
 
-    // 상세 내역 동적 로딩
+    // 2. 구매 신청 상세 내역 데이터 채움 (결제상태에 따른 매핑 버튼 제어)
     function showRequestDetail(orderId, status, buyerType) {
         document.getElementById('req_orderId').innerText = orderId;
         const statusEl = document.getElementById('req_status');
@@ -438,8 +438,8 @@
         
         document.getElementById('req_buyerTypeBadge').innerHTML = buyerType === '개인' ? `<span class="bg-blue-600 text-white px-2 py-0.5 rounded text-[10px] font-bold">개인</span>` : `<span class="bg-kona-dark text-white px-2 py-0.5 rounded text-[10px] font-bold">법인</span>`;
         if(buyerType === '개인') {
-            document.getElementById('req_buyerName').innerText = '이신청';
-            document.getElementById('req_buyerContact').innerHTML = '010-1111-2222 <span class="text-gray-300 mx-2">|</span> lee@gmail.com';
+            document.getElementById('req_buyerName').innerText = '홍길동';
+            document.getElementById('req_buyerContact').innerHTML = '010-1234-5678 <span class="text-gray-300 mx-2">|</span> hong@gmail.com';
         } else {
             document.getElementById('req_buyerName').innerText = '김코나 ((주)코나아이)';
             document.getElementById('req_buyerContact').innerHTML = '010-9999-8888 <span class="text-gray-300 mx-2">|</span> kona@konai.com';
@@ -450,7 +450,7 @@
             document.getElementById('req_regDate').innerText = '2026/03/15 09:00:15';
             document.getElementById('req_payDate').innerHTML = '-';
             document.getElementById('req_totalPrice').innerHTML = '1,000,000 원';
-            tableHint.innerText = '※ 입금 완료 후 매핑이 가능합니다.';
+            tableHint.innerText = '※ 입금 완료 후 카드를 매핑할 수 있습니다.';
             
             payMethodContainer.innerHTML = `<span class="font-bold">무통장입금 (가상계좌)</span><span class="text-blue-600 font-bold ml-2">우리은행 2819-1043-1234</span><button class="border border-gray-300 px-2 py-0.5 rounded text-[10px] bg-white hover:bg-gray-100 ml-2" onclick="alert('가상계좌번호가 복사되었습니다.')">복사</button>`;
             actionBtns.innerHTML = `<button class="bg-blue-50 border border-blue-600 text-blue-700 px-5 py-2 rounded-full text-xs font-bold shadow-sm hover:bg-blue-100 transition" onclick="alert('결제 정보가 고객에게 재발송되었습니다.');">결제 정보 재발송</button><button onclick="switchView('view-list')" class="border border-gray-300 px-6 py-2 rounded-full text-xs font-bold bg-white text-gray-700 hover:bg-gray-50 transition ml-2">목록</button>`;
@@ -460,20 +460,6 @@
                 <tr class="border-b border-gray-200 bg-white hover:bg-gray-50 transition"><td class="py-3 border-r border-[#2a3754]/10">2</td><td class="text-left pl-4 font-bold text-gray-900 border-r border-[#2a3754]/10">더한옥 VIP 상품권(500,000원)</td><td class="text-gray-400 border-r border-[#2a3754]/10">입금 대기중</td><td class="text-right pr-4 font-bold text-blue-800">500,000</td></tr>
             `;
         } 
-        else if (status === 'received') {
-            statusEl.innerHTML = '<span class="text-red-500 font-bold bg-red-50 border border-red-200 px-2 py-0.5 rounded text-xs">구매신청 (매핑대기)</span>';
-            document.getElementById('req_regDate').innerText = '2026/03/11 10:15:00';
-            document.getElementById('req_payDate').innerHTML = '-';
-            document.getElementById('req_totalPrice').innerHTML = '200,000 원';
-            tableHint.innerText = '※ 카드를 매핑 후 결제 링크를 전송해주세요.';
-            
-            payMethodContainer.innerHTML = `<span class="font-bold">무통장입금 (가상계좌)</span> <span class="bg-gray-100 text-gray-500 font-bold px-2 py-0.5 text-xs rounded ml-2">발급 전</span>`;
-            actionBtns.innerHTML = `<button class="bg-[#121F3D] text-white px-6 py-2 rounded-full text-xs font-bold shadow-md hover:bg-black transition" onclick="submitRegistration()">결제 링크 발송</button><button onclick="switchView('view-list')" class="border border-gray-300 px-6 py-2 rounded-full text-xs font-bold bg-white text-gray-700 hover:bg-gray-50 transition ml-2">목록</button>`;
-            
-            cardTable.innerHTML = `
-                <tr class="border-b border-gray-200 bg-white hover:bg-gray-50 transition"><td class="py-3 border-r border-[#2a3754]/10">1</td><td class="text-left pl-4 font-bold text-gray-900 border-r border-[#2a3754]/10">더한옥헤리티지하우스 상품권(200,000원)</td><td id="req_card_td_1" class="border-r border-[#2a3754]/10"><button onclick="activeMappingId='req_1'; openMappingModal()" class="border border-blue-400 text-blue-700 bg-blue-50 px-4 py-1.5 text-xs rounded-full font-bold shadow-sm hover:bg-blue-100 transition">재고 카드 매핑하기</button></td><td class="text-right pr-4 font-bold text-blue-800">200,000</td></tr>
-            `;
-        }
         else if (status === 'paid') {
             statusEl.innerHTML = '<span class="text-red-500 font-bold bg-red-50 px-2 py-0.5 rounded border border-red-200 text-xs">결제완료 (매핑대기)</span>';
             document.getElementById('req_regDate').innerText = '2026/03/15 16:05:15';
@@ -514,11 +500,11 @@
         let allMapped = true;
         tds.forEach(td => { if(td && td.innerHTML.includes('button')) allMapped = false; });
         if(!allMapped) { alert('모든 상품에 카드를 매핑해주세요.'); return; }
-        alert('매핑 및 처리가 완료되었습니다.');
+        alert('매핑 및 발급 처리가 완료되었습니다.');
         switchView('view-list');
     }
 
-    // 고객 검색 팝업 로직
+    // 3. 고객 검색 팝업 로직
     let activeFlow = ''; 
     function initFlow(flow) {
         activeFlow = flow;
@@ -572,7 +558,7 @@
         closeCustomerSearchModal();
     }
 
-    // 충전 금액 계산
+    // 4. 충전 금액 계산
     function calcRechargeTotal(inputElem) {
         const rawVal = inputElem.value.replace(/[^0-9]/g, '');
         inputElem.value = rawVal ? Number(rawVal).toLocaleString() : '';
@@ -585,9 +571,9 @@
         document.getElementById('rechargeTotalPrice').innerText = total.toLocaleString();
     }
 
-    function submitRecharge() { alert('충전 결제 링크가 전송되었습니다.'); switchView('view-list'); }
+    function submitRecharge() { alert('충전 결제 요청 링크가 전송되었습니다.'); switchView('view-list'); }
 
-    // 신규 발급 장바구니 로직
+    // 5. 신규 발급 장바구니 로직 (매핑 컬럼 완전 제거)
     let orderItems = []; let itemCounter = 0; let activeMappingId = null;
     function changeDenoms() {
         const prod = document.getElementById('item_prod').value; const denomEl = document.getElementById('item_denom');
@@ -603,36 +589,33 @@
     }
     function renderSalesCart() {
         const tbody = document.getElementById('sales_cart_body'); let total = 0;
-        if(orderItems.length === 0) { tbody.innerHTML = `<tr><td colspan="5" class="py-12 text-gray-400 bg-gray-50 text-center">우측 상단의 [+ 상품/권종 추가] 버튼을 눌러주세요.</td></tr>`; document.getElementById('sales_total_price').innerText = '0'; return; }
+        if(orderItems.length === 0) { tbody.innerHTML = `<tr><td colspan="4" class="py-12 text-gray-400 bg-gray-50 text-center">우측 상단의 [+ 상품/권종 추가] 버튼을 눌러주세요.</td></tr>`; document.getElementById('sales_total_price').innerText = '0'; return; }
         let html = '';
         orderItems.forEach((item, idx) => {
             total += item.amount;
-            const btn = item.cardNum ? `<span class="font-mono text-blue-600 font-bold underline cursor-pointer" onclick="activeMappingId=${item.id}; openMappingModal()">${item.cardNum}</span>` : `<button onclick="activeMappingId=${item.id}; openMappingModal()" class="border border-blue-400 text-blue-700 bg-blue-50 px-4 py-1.5 text-xs rounded-full font-bold shadow-sm hover:bg-blue-100 transition">재고 카드 매핑</button>`;
-            html += `<tr class="border-b border-gray-200 bg-white hover:bg-blue-50 transition"><td class="py-3 border-r border-[#2a3754]/10">${idx+1}</td><td class="text-left pl-4 font-bold text-gray-800 border-r border-[#2a3754]/10">${item.product}</td><td class="text-right pr-6 font-bold text-blue-800 border-r border-[#2a3754]/10">${item.amount.toLocaleString()}</td><td class="border-r border-[#2a3754]/10">${btn}</td><td><button onclick="removeSalesItem(${item.id})" class="text-red-500 font-bold text-xl hover:text-red-700">&times;</button></td></tr>`;
+            html += `<tr class="border-b border-gray-200 bg-white hover:bg-blue-50 transition"><td class="py-3 border-r border-[#2a3754]/10">${idx+1}</td><td class="text-left pl-4 font-bold text-gray-800 border-r border-[#2a3754]/10">${item.product}</td><td class="text-right pr-6 font-bold text-blue-800 border-r border-[#2a3754]/10">${item.amount.toLocaleString()}</td><td><button onclick="removeSalesItem(${item.id})" class="text-red-500 font-bold text-xl hover:text-red-700">&times;</button></td></tr>`;
         });
         tbody.innerHTML = html; document.getElementById('sales_total_price').innerText = total.toLocaleString();
     }
     function removeSalesItem(id) { orderItems = orderItems.filter(i => i.id !== id); renderSalesCart(); }
     
+    // 매핑 모달 공용 로직
     function openMappingModal() { document.getElementById('mappingModal').classList.remove('hidden'); document.getElementById('mappingModal').classList.add('flex'); }
     function closeMappingModal() { document.getElementById('mappingModal').classList.add('hidden'); document.getElementById('mappingModal').classList.remove('flex'); }
     function applyMapping(num) { 
         if(activeMappingId && String(activeMappingId).startsWith('req_')) {
             const tdId = 'req_card_td_' + activeMappingId.split('_')[1];
             document.getElementById(tdId).innerHTML = `<span class="font-mono text-blue-600 font-bold underline cursor-pointer" onclick="activeMappingId='${activeMappingId}'; openMappingModal()">${num}</span>`;
-        } else {
-            const item = orderItems.find(i => i.id === activeMappingId); if(item) item.cardNum = num; renderSalesCart(); 
-        }
+        } 
         closeMappingModal(); 
     }
     
     function submitNewIssue() {
-        if(orderItems.length === 0) return alert('결제할 상품을 추가해주세요.');
-        if(orderItems.some(r => !r.cardNum)) return alert('매핑되지 않은 카드가 있습니다.');
-        alert('신규 발급 결제 링크가 전송되었습니다.'); switchView('view-list');
+        if(orderItems.length === 0) return alert('결제 요청할 상품을 추가해주세요.');
+        alert('신규 발급 주문이 생성되어 결제 요청 링크가 전송되었습니다.'); switchView('view-list');
     }
 
-    // 판매 정책 팝업 로직
+    // 6. 판매 정책 관리 팝업 로직
     function toggleProduct(checkbox, bodyId) {
         const body = document.getElementById(bodyId); const wrapper = checkbox.closest('.bg-white.border'); const header = checkbox.closest('.p-4'); const title = header.querySelector('span.text-base');
         if (checkbox.checked) {
@@ -653,11 +636,9 @@
         const formatted = Number(val).toLocaleString() + '원';
         const container = document.getElementById(containerId); const item = document.createElement('div');
         item.className = "flex items-center justify-between border border-gray-200 p-2.5 rounded bg-white shadow-sm hover:border-blue-300 transition";
-        item.innerHTML = `<span class="font-bold text-blue-800 ml-2">${formatted}</span><div class="flex items-center gap-4"><select class="border border-gray-300 px-2 py-1 rounded text-xs font-bold outline-none"><option>사용</option><option>미사용</option></select><button onclick="this.closest('div.flex').remove()" class="text-red-500 font-bold hover:text-red-700 text-lg leading-none mr-2">&times;</button></div>`;
+        item.innerHTML = `<span class="font-bold text-blue-800 ml-2">${formatted}</span><div class="flex items-center gap-4"><select class="border border-gray-300 px-2 py-1 rounded text-xs font-bold outline-none"><option>사용</option><option>미사용</option></select><button onclick="this.parentElement.parentElement.remove()" class="text-red-500 font-bold hover:text-red-700 text-lg leading-none mr-2">&times;</button></div>`;
         container.appendChild(item); input.value = '';
     }
     function openPolicyModal() { document.getElementById('policyModal').classList.remove('hidden'); document.getElementById('policyModal').classList.add('flex'); }
     function closePolicyModal() { document.getElementById('policyModal').classList.add('hidden'); document.getElementById('policyModal').classList.remove('flex'); }
 </script>
-</body>
-</html>
